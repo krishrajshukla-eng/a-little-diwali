@@ -2,7 +2,7 @@
 
 **A small 3D Diwali greeting, made to share a little warmth.**
 
-This is a personal, beginner-friendly web project by **Krishraj Shukla**. It opens with a diya lighting and curtains parting onto a family celebration: an enlarged decorated home, a Lakshmi-Ganesh wall photo, fruit baskets, chimney smoke, and an overflowing gold pot with falling coins.
+This is a personal, beginner-friendly web project by **Krishraj Shukla**. It opens with a diya lighting and curtains parting onto a family celebration: a decorated two-storey home, flowering trees, a Lakshmi-Ganesh wall photo, an illustrated Ram Darbar beside an overflowing gold pot, and children enjoying sparklers and a rocket.
 
 It is a simple creative project, not a realistic Diwali simulation. The scene uses stylised 3D shapes; the focus is on a warm greeting, not photorealism.
 
@@ -14,7 +14,7 @@ It is a simple creative project, not a realistic Diwali simulation. The scene us
 - Tap the scene for another wish.
 - Use **A wish for you** to cycle through the messages.
 - Use **Share** to open your device's share options, or copy the link where supported.
-- Enjoy occasional fireworks, with motion kept lighter for visitors who prefer reduced animation.
+- Enjoy falling gold coins, occasional fireworks, and a rocket launch; motion is kept lighter for visitors who prefer reduced animation.
 
 ## Try it on your computer
 
