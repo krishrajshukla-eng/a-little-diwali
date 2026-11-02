@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#100719">
+    <meta name="description" content="A little 3D Diwali celebration, made with light and love.">
+    <meta property="og:title" content="Shubh Deepavali | Wishes by Krishraj Shukla">
+    <meta property="og:description" content="A little 3D Diwali celebration, made with light and love. Tap to see a wish.">
+    <title>Shubh Deepavali | Wishes by Krishraj Shukla</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Georgia, "Noto Serif Devanagari", serif;
+        color: #fff3d4;
+        background: #100719;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        --gold: #ffd27b;
+        --muted: #e5d6e8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        background: #100719;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .celebration {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+        isolation: isolate;
+        background:
+          radial-gradient(ellipse at 50% 70%, rgb(101 42 79 / 34%), transparent 48%),
+          linear-gradient(180deg, #100719 0%, #21102f 70%, #351b34 100%);
+      }
+
+      #diwali-scene {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+      }
+
+      .topbar,
+      .hero-copy,
+      .scene-hint,
+      .wish-card {
+        position: absolute;
+        z-index: 1;
+      }
+
+      .topbar {
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 22px clamp(18px, 5vw, 64px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        color: var(--gold);
+        font-family: Arial, sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .top-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .button {
+        min-height: 42px;
+        padding: 10px 16px;
+        border: 1px solid rgb(255 210 123 / 55%);
+        border-radius: 999px;
+        color: #fff3d4;
+        background: rgb(20 9 29 / 62%);
+        cursor: pointer;
+        transition: background 180ms ease, transform 180ms ease;
+      }
+
+      .button:hover {
+        background: rgb(105 60 75 / 80%);
+        transform: translateY(-1px);
+      }
+
+      .button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid #fff3d4;
+        outline-offset: 3px;
+      }
+
+      .hero-copy {
+        top: 12%;
+        left: 50%;
+        width: min(680px, calc(100% - 36px));
+        text-align: center;
+        transform: translateX(-50%);
+        pointer-events: none;
+        text-shadow: 0 2px 18px #100719;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--gold);
+        font-family: Arial, sans-serif;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        color: #fff2ca;
+        font-size: clamp(2.4rem, 6vw, 4.4rem);
+        font-weight: 400;
+        line-height: 1.08;
+      }
+
+      h1 span {
+        display: block;
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .intro {
+        max-width: 470px;
+        margin: 14px auto 0;
+        color: var(--muted);
+        font-family: Arial, sans-serif;
+        font-size: clamp(0.92rem, 2.5vw, 1.05rem);
+        line-height: 1.6;
+      }
+
+      .scene-hint {
+        right: 16px;
+        bottom: 19px;
+        left: 16px;
+        margin: 0;
+        color: #ead9c5;
+        font-family: Arial, sans-serif;
+        font-size: 0.78rem;
+        text-align: center;
+        text-shadow: 0 2px 8px #100719;
+        pointer-events: none;
+      }
+
+      .wish-card {
+        bottom: 8%;
+        left: 50%;
+        width: min(580px, calc(100% - 36px));
+        padding: 16px 20px;
+        border: 1px solid rgb(255 210 123 / 32%);
+        border-radius: 18px;
+        background: rgb(16 7 25 / 74%);
+        box-shadow: 0 12px 42px rgb(0 0 0 / 22%);
+        text-align: center;
+        transform: translateX(-50%);
+        backdrop-filter: blur(8px);
+      }
+
+      .wish-card p {
+        margin: 0;
+        color: #fff0d2;
+        font-size: clamp(1rem, 3vw, 1.3rem);
+        line-height: 1.55;
+      }
+
+      .credit {
+        padding: 22px 18px 26px;
+        color: var(--muted);
+        font-family: Arial, sans-serif;
+        font-size: 0.85rem;
+        text-align: center;
+      }
+
+      .credit strong {
+        color: var(--gold);
+        font-weight: 600;
+      }
+
+      .credit p {
+        margin: 0;
+      }
+
+      @media (max-width: 560px) {
+        .topbar {
+          padding: 16px;
+        }
+
+        .brand {
+          max-width: 125px;
+          font-size: 0.68rem;
+          line-height: 1.5;
+        }
+
+        .button {
+          min-height: 40px;
+          padding: 8px 12px;
+          font-size: 0.8rem;
+        }
+
+        .hero-copy {
+          top: 11%;
+        }
+
+        .wish-card {
+          bottom: 9%;
+          padding: 13px 15px;
+        }
+      }
+
+      @media (max-height: 620px) and (min-width: 561px) {
+        .hero-copy {
+          top: 12%;
+        }
+
+        .wish-card {
+          bottom: 7%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="celebration" aria-labelledby="page-title">
+        <canvas id="diwali-scene" aria-hidden="true"></canvas>
+
+        <header class="topbar">
+          <a class="brand" href="#home">Wishes by Krishraj Shukla</a>
+          <div class="top-actions">
+            <button class="button" id="wish-button" type="button">A wish for you</button>
+            <button class="button" id="share-button" type="button">Share</button>
+          </div>
+        </header>
+
+        <div class="hero-copy" id="home">
+          <p class="eyebrow">A little light goes a long way</p>
+          <h1 id="page-title">शुभ <span>दीपावली</span></h1>
+          <p class="intro">
+            Is roshni bhari shaam par, apno ke saath baantein khushi, pyaar aur ek nayi umeed.
+          </p>
+        </div>
+
+        <div class="wish-card" aria-live="polite" aria-atomic="true">
+          <p id="wish">इस दिवाली हर अंधेरा छोटा पड़ जाए।</p>
+        </div>
+        <p class="scene-hint" id="scene-status">
+          Ghar ko dekhne ke liye drag karein · ek nayi wish ke liye tap karein
+        </p>
+      </section>
+
+      <footer class="credit">
+        <p>Made with light and love · <strong>Wishes by Krishraj Shukla</strong></p>
+      </footer>
+    </main>
+
+    <script type="module">
+      const wishButton = document.querySelector("#wish-button");
+      const shareButton = document.querySelector("#share-button");
+      const wishBox = document.querySelector("#wish");
+      const status = document.querySelector("#scene-status");
+      const wishes = [
+        "इस दिवाली हर अंधेरा छोटा पड़ जाए।",
+        "एक दीया उनके नाम, जो बिना कहे हमारे साथ रहे।",
+        "रोशनी सिर्फ़ घर में नहीं, मन में भी जले।",
+        "खुशियाँ इतनी हों कि बाँटने पर भी कम न पड़ें।",
+        "जो इस साल थक गए हैं, उनके लिए एक नई सुबह जैसी दिवाली।",
+        "पटाखों से ज़्यादा आवाज़ हँसी की हो।"
+      ];
+      let wishIndex = 1;
+      let celebrate = () => {};
+
+      function showWish() {
+        wishBox.textContent = wishes[wishIndex];
+        wishIndex = (wishIndex + 1) % wishes.length;
+        celebrate();
+      }
+
+      wishButton.addEventListener("click", showWish);
+
+      shareButton.addEventListener("click", async () => {
+        const shareData = {
+          title: document.title,
+          text: "A little Diwali wish, made with light and love.",
+          url: window.location.href
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            status.textContent = "Thanks for sharing a little light.";
+          } catch (error) {
+            if (error.name !== "AbortError") {
+              status.textContent = "Sharing did not work here. Please copy the page link from your browser.";
+            }
+          }
+          return;
+        }
+
+        if (navigator.clipboard?.writeText) {
+          try {
+            await navigator.clipboard.writeText(shareData.url);
+            status.textContent = "Page link copied. Share it with someone you love.";
+          } catch {
+            status.textContent = "Copy the page link from your browser address bar to share it.";
+          }
+          return;
+        }
+
+        status.textContent = "Copy the page link from your browser address bar to share it.";
+      });
+
+      try {
+        const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js");
+        createScene(THREE);
+      } catch (error) {
+        status.textContent = "3D scene could not load. Check your internet connection and refresh.";
+        console.error("Could not load the Diwali 3D scene.", error);
+      }
+
+      function createScene(THREE) {
+        const canvas = document.querySelector("#diwali-scene");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color("#100719");
+        scene.fog = new THREE.Fog("#21102f", 18, 38);
+
+        const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: window.devicePixelRatio < 2,
+          alpha: false
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.25;
+
+        scene.add(new THREE.HemisphereLight("#c9bcff", "#32152c", 2.1));
+        const moonLight = new THREE.DirectionalLight("#ffe6b1", 3);
+        moonLight.position.set(-5, 10, 7);
+        moonLight.castShadow = true;
+        moonLight.shadow.mapSize.set(1024, 1024);
+        scene.add(moonLight);
+
+        const material = (color, roughness = 0.82, extra = {}) => new THREE.MeshStandardMaterial({
+          color,
+          roughness,
+          ...extra
+        });
+        const mats = {
+          ground: material("#38243d"),
+          wall: material("#9e543e"),
+          trim: material("#ffcf72", 0.55, { metalness: 0.35 }),
+          roof: material("#57233a"),
+          door: material("#572a28"),
+          window: material("#ffd06c", 0.3, { emissive: "#ff9f31", emissiveIntensity: 1.6 }),
+          leaf: material("#276947"),
+          pot: material("#b8583e"),
+          bowl: material("#bd642e", 0.42, { metalness: 0.2 }),
+          gold: material("#ffce59", 0.32, { metalness: 0.7 }),
+          skin: material("#e9ad78"),
+          hair: material("#241a24"),
+          white: material("#f9e9c7")
+        };
+        const box = (w, h, d, mat, x, y, z, parent = scene) => {
+          const item = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+          item.position.set(x, y, z);
+          item.castShadow = true;
+          item.receiveShadow = true;
+          parent.add(item);
+          return item;
+        };
+        const sphere = (radius, mat, x, y, z, parent = scene, scale = [1, 1, 1]) => {
+          const item = new THREE.Mesh(new THREE.SphereGeometry(radius, 12, 10), mat);
+          item.position.set(x, y, z);
+          item.scale.set(...scale);
+          item.castShadow = true;
+          parent.add(item);
+          return item;
+        };
+        const cylinder = (top, bottom, height, mat, x, y, z, parent = scene, sides = 12) => {
+          const item = new THREE.Mesh(new THREE.CylinderGeometry(top, bottom, height, sides), mat);
+          item.position.set(x, y, z);
+          item.castShadow = true;
+          parent.add(item);
+          return item;
+        };
+
+        const ground = new THREE.Mesh(new THREE.PlaneGeometry(42, 42), mats.ground);
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -0.06;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        const moon = sphere(1.05, material("#fff0c1", 0.5, { emissive: "#e5bd75", emissiveIntensity: 0.38 }), 7, 9, -9);
+        const moonGlow = new THREE.PointLight("#ffc96d", 24, 18);
+        moonGlow.position.copy(moon.position);
+        scene.add(moonGlow);
+
+        const starPositions = new Float32Array(540 * 3);
+        for (let i = 0; i < starPositions.length; i += 3) {
+          starPositions[i] = (Math.random() - 0.5) * 34;
+          starPositions[i + 1] = 4 + Math.random() * 15;
+          starPositions[i + 2] = -12 + Math.random() * 10;
+        }
+        const starGeometry = new THREE.BufferGeometry();
+        starGeometry.setAttribute("position", new THREE.BufferAttribute(starPositions, 3));
+        const stars = new THREE.Points(
+          starGeometry,
+          new THREE.PointsMaterial({ color: "#ffe7ad", size: 0.055, sizeAttenuation: true })
+        );
+        scene.add(stars);
+
+        const house = new THREE.Group();
+        house.position.z = -4;
+        scene.add(house);
+        box(8.4, 4.2, 0.65, mats.wall, 0, 2.1, 0, house);
+        const gable = new THREE.Shape();
+        gable.moveTo(-4.55, 0);
+        gable.lineTo(0, 2.3);
+        gable.lineTo(4.55, 0);
+        gable.closePath();
+        const roof = new THREE.Mesh(
+          new THREE.ExtrudeGeometry(gable, { depth: 0.78, bevelEnabled: false }),
+          mats.roof
+        );
+        roof.position.set(0, 4.2, -0.39);
+        roof.castShadow = true;
+        roof.receiveShadow = true;
+        house.add(roof);
+        box(8.7, 0.16, 0.9, mats.trim, 0, 4.2, 0.04, house);
+        box(1.65, 2.75, 0.2, mats.door, 0, 1.38, 0.42, house);
+        box(1.83, 0.16, 0.28, mats.trim, 0, 2.78, 0.43, house);
+        sphere(0.08, mats.gold, 0.55, 1.35, 0.56, house);
+
+        for (const x of [-2.7, 2.7]) {
+          box(1.25, 1.35, 0.18, mats.trim, x, 2.48, 0.42, house);
+          box(0.96, 1.08, 0.12, mats.window, x, 2.48, 0.54, house);
+          box(0.09, 1.08, 0.14, mats.trim, x, 2.48, 0.63, house);
+          box(0.96, 0.09, 0.14, mats.trim, x, 2.48, 0.63, house);
+        }
+
+        const frameColors = ["#d6634c", "#e7a43a", "#8d5bb5"];
+        const frameTitles = ["श्री गणेश", "श्री लक्ष्मी", "राम दरबार"];
+        for (let i = 0; i < frameTitles.length; i++) {
+          const art = document.createElement("canvas");
+          art.width = 256;
+          art.height = 192;
+          const ctx = art.getContext("2d");
+          const gradient = ctx.createLinearGradient(0, 0, 0, 192);
+          gradient.addColorStop(0, "#ffe8a6");
+          gradient.addColorStop(1, frameColors[i]);
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, 256, 192);
+          ctx.fillStyle = "#5b293c";
+          ctx.font = "bold 30px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(frameTitles[i], 128, 96);
+          const texture = new THREE.CanvasTexture(art);
+          texture.colorSpace = THREE.SRGBColorSpace;
+          const x = (i - 1) * 2.25;
+          box(1.48, 1.13, 0.12, mats.gold, x, 3.75, 0.47, house);
+          const image = new THREE.Mesh(
+            new THREE.PlaneGeometry(1.28, 0.93),
+            new THREE.MeshBasicMaterial({ map: texture })
+          );
+          image.position.set(x, 3.75, 0.55);
+          house.add(image);
+        }
+
+        const garlandCurve = new THREE.QuadraticBezierCurve3(
+          new THREE.Vector3(-3.85, 4.05, 0.54),
+          new THREE.Vector3(0, 2.9, 0.6),
+          new THREE.Vector3(3.85, 4.05, 0.54)
+        );
+        const garland = new THREE.Mesh(
+          new THREE.TubeGeometry(garlandCurve, 36, 0.055, 6, false),
+          mats.leaf
+        );
+        house.add(garland);
+        for (let i = 0; i < 17; i++) {
+          const point = garlandCurve.getPoint(i / 16);
+          sphere(0.11, i % 2 ? mats.gold : mats.pot, point.x, point.y - 0.03, point.z + 0.02, house, [0.8, 1.2, 0.8]);
+        }
+
+        for (const x of [-3.9, -3.2, -2.5, -1.8, -1.1, -0.4, 0.4, 1.1, 1.8, 2.5, 3.2, 3.9]) {
+          const bulb = sphere(0.09, new THREE.MeshStandardMaterial({
+            color: "#ffdb8a",
+            emissive: "#ff9d39",
+            emissiveIntensity: 1.7
+          }), x, 4.35 - Math.abs(x) * 0.18, 0.66, house);
+          const glow = new THREE.PointLight("#ffb64e", 0.8, 2.6);
+          glow.position.copy(bulb.position);
+          house.add(glow);
+          bulb.userData.glow = glow;
+        }
+
+        for (let step = 0; step < 3; step++) {
+          box(2.45 + step * 0.65, 0.2, 0.7, mats.trim, 0, 0.12 + step * 0.2, 0.78 + step * 0.45);
+        }
+
+        const rangoli = new THREE.Group();
+        rangoli.position.set(0, 0.025, 1.5);
+        scene.add(rangoli);
+        const disc = new THREE.Mesh(
+          new THREE.CircleGeometry(1.55, 48),
+          new THREE.MeshStandardMaterial({ color: "#532848", roughness: 0.65 })
+        );
+        disc.rotation.x = -Math.PI / 2;
+        rangoli.add(disc);
+        const rangoliColors = ["#ffd27b", "#e36a53", "#8dc8a1", "#df9acb"];
+        for (let i = 0; i < 16; i++) {
+          const angle = (i / 16) * Math.PI * 2;
+          const petal = sphere(0.24, material(rangoliColors[i % rangoliColors.length], 0.55), Math.cos(angle) * 0.85, 0.04, Math.sin(angle) * 0.85, rangoli, [0.7, 0.16, 1.6]);
+          petal.rotation.y = -angle;
+        }
+        for (let i = 0; i < 12; i++) {
+          const angle = (i / 12) * Math.PI * 2;
+          sphere(0.07, mats.gold, Math.cos(angle) * 1.27, 0.07, Math.sin(angle) * 1.27, rangoli);
+        }
+
+        const flames = [];
+        function makeDiya(x, z, scale = 1) {
+          const group = new THREE.Group();
+          group.position.set(x, 0, z);
+          group.scale.setScalar(scale);
+          scene.add(group);
+          sphere(0.4, mats.bowl, 0, 0.18, 0, group, [1.35, 0.48, 0.8]);
+          cylinder(0.27, 0.47, 0.12, mats.gold, 0, 0.26, 0, group, 16);
+          const flame = sphere(0.15, new THREE.MeshStandardMaterial({
+            color: "#fff1a7",
+            emissive: "#ff8f2f",
+            emissiveIntensity: 3
+          }), 0, 0.52, 0, group, [0.7, 1.6, 0.7]);
+          const light = new THREE.PointLight("#ff9a42", 2.2, 4);
+          light.position.set(0, 0.6, 0.1);
+          group.add(light);
+          flames.push({ flame, light, phase: Math.random() * 7 });
+        }
+        for (const x of [-4.3, -2.9, -1.65, 1.65, 2.9, 4.3]) makeDiya(x, 1.7, 0.72);
+        for (let i = 0; i < 8; i++) {
+          const angle = (i / 8) * Math.PI * 2;
+          makeDiya(Math.cos(angle) * 1.85, 1.5 + Math.sin(angle) * 1.85, 0.45);
+        }
+
+        function makePlant(x, z) {
+          cylinder(0.28, 0.36, 0.55, mats.pot, x, 0.27, z);
+          for (let i = 0; i < 5; i++) {
+            const angle = i * Math.PI * 0.4;
+            const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.19, 1.25, 7), mats.leaf);
+            leaf.position.set(x + Math.cos(angle) * 0.2, 1.05, z + Math.sin(angle) * 0.2);
+            leaf.rotation.z = Math.cos(angle) * 0.35;
+            leaf.rotation.x = Math.sin(angle) * 0.35;
+            leaf.castShadow = true;
+            scene.add(leaf);
+          }
+          sphere(0.15, mats.gold, x + 0.12, 1.45, z, scene, [0.55, 0.8, 0.55]);
+        }
+        makePlant(-5.4, -0.6);
+        makePlant(5.4, -0.6);
+
+        const people = [];
+        function makePerson(x, z, height, clothes, holdingSparkler = false) {
+          const person = new THREE.Group();
+          person.position.set(x, 0, z);
+          scene.add(person);
+          const bodyHeight = height * 0.43;
+          cylinder(height * 0.14, height * 0.2, bodyHeight, material(clothes), 0, height * 0.48, 0, person, 8);
+          sphere(height * 0.15, mats.skin, 0, height * 0.83, 0, person);
+          sphere(height * 0.16, mats.hair, 0, height * 0.94, -0.015, person, [1, 0.48, 0.95]);
+          for (const side of [-1, 1]) {
+            const arm = cylinder(height * 0.055, height * 0.07, height * 0.34, material(clothes), side * height * 0.21, height * 0.51, 0.03, person, 7);
+            arm.rotation.z = side * -0.42;
+          }
+          for (const side of [-1, 1]) {
+            cylinder(height * 0.065, height * 0.075, height * 0.3, mats.door, side * height * 0.1, height * 0.15, 0.02, person, 7);
+          }
+          if (holdingSparkler) {
+            const stick = cylinder(0.025, 0.025, 0.7, mats.trim, height * 0.34, height * 0.72, 0.04, person, 6);
+            stick.rotation.z = -0.25;
+            sphere(0.12, new THREE.MeshBasicMaterial({ color: "#fff0a0" }), height * 0.4, height * 1.07, 0.05, person);
+          }
+          people.push(person);
+        }
+        makePerson(-1.75, 0.1, 2.65, "#b5424d");
+        makePerson(-0.2, -0.05, 2.85, "#287c71");
+        makePerson(1.45, 0.1, 2.55, "#a94992");
+        makePerson(-3.25, 0.65, 1.85, "#e29c35", true);
+        makePerson(3.2, 0.7, 1.8, "#4384a0", true);
+
+        cylinder(0.47, 0.36, 0.62, mats.gold, 5.1, 0.37, 1.35);
+        sphere(0.17, mats.gold, 5.1, 0.78, 1.35, scene, [1.2, 0.65, 1.2]);
+        const coinGeometry = new THREE.CylinderGeometry(0.12, 0.12, 0.035, 12);
+        const coinMaterial = mats.gold;
+        const coins = [];
+        for (let i = 0; i < 12; i++) {
+          const coin = new THREE.Mesh(coinGeometry, coinMaterial);
+          coin.position.set(5.1 + (Math.random() - 0.5) * 0.7, 1.1 + Math.random() * 2, 1.35 + (Math.random() - 0.5) * 0.5);
+          coin.castShadow = true;
+          coin.userData.phase = Math.random() * Math.PI * 2;
+          scene.add(coin);
+          coins.push(coin);
+        }
+
+        const fireworks = [];
+        function launchFirework() {
+          const count = 38;
+          const positions = new Float32Array(count * 3);
+          const velocities = new Float32Array(count * 3);
+          const origin = new THREE.Vector3((Math.random() - 0.5) * 12, 5 + Math.random() * 5, -7);
+          for (let i = 0; i < count; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const elevation = Math.random() * Math.PI;
+            const speed = 1.2 + Math.random() * 2.6;
+            velocities[i * 3] = Math.cos(angle) * Math.sin(elevation) * speed;
+            velocities[i * 3 + 1] = Math.cos(elevation) * speed;
+            velocities[i * 3 + 2] = Math.sin(angle) * Math.sin(elevation) * speed;
+          }
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+          const color = ["#ffd27b", "#ff8f76", "#b9a2ff", "#fff1c1"][Math.floor(Math.random() * 4)];
+          const points = new THREE.Points(
+            geometry,
+            new THREE.PointsMaterial({ color, size: 0.1, transparent: true, opacity: 1, depthWrite: false })
+          );
+          points.position.copy(origin);
+          scene.add(points);
+          fireworks.push({ points, positions, velocities, age: 0, life: 1.8 });
+        }
+        celebrate = launchFirework;
+
+        let yaw = 0;
+        let targetYaw = 0;
+        let pitch = 0;
+        let targetPitch = 0;
+        let dragStart = null;
+        let pointerMoved = 0;
+        let lastLaunch = 0;
+        const clock = new THREE.Clock();
+
+        canvas.addEventListener("pointerdown", (event) => {
+          dragStart = { x: event.clientX, y: event.clientY };
+          pointerMoved = 0;
+          canvas.setPointerCapture(event.pointerId);
+        });
+        canvas.addEventListener("pointermove", (event) => {
+          if (!dragStart) return;
+          const dx = event.clientX - dragStart.x;
+          const dy = event.clientY - dragStart.y;
+          pointerMoved += Math.abs(dx) + Math.abs(dy);
+          targetYaw = THREE.MathUtils.clamp(targetYaw - dx * 0.004, -0.55, 0.55);
+          targetPitch = THREE.MathUtils.clamp(targetPitch + dy * 0.003, -0.3, 0.5);
+          dragStart = { x: event.clientX, y: event.clientY };
+        });
+        canvas.addEventListener("pointerup", () => {
+          if (dragStart && pointerMoved < 8) showWish();
+          dragStart = null;
+        });
+        canvas.addEventListener("pointercancel", () => {
+          dragStart = null;
+        });
+
+        function resize() {
+          const width = canvas.clientWidth;
+          const height = canvas.clientHeight;
+          if (!width || !height) return;
+          camera.aspect = width / height;
+          camera.position.z = Math.max(13, 13 / camera.aspect * 0.72);
+          camera.updateProjectionMatrix();
+          renderer.setSize(width, height, false);
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        function animate() {
+          requestAnimationFrame(animate);
+          const delta = Math.min(clock.getDelta(), 0.05);
+          const elapsed = clock.elapsedTime;
+          yaw += (targetYaw - yaw) * 0.06;
+          pitch += (targetPitch - pitch) * 0.06;
+          camera.position.x = Math.sin(yaw) * camera.position.z;
+          camera.position.y = 6.4 + pitch * 4;
+          camera.lookAt(0, 4.1, -1.2);
+          stars.rotation.y = elapsed * 0.006;
+
+          for (const flame of flames) {
+            const flicker = 1 + Math.sin(elapsed * 9 + flame.phase) * 0.12;
+            flame.flame.scale.y = 1.6 * flicker;
+            flame.light.intensity = 1.8 + flicker;
+          }
+          for (const person of people) {
+            person.rotation.y = Math.sin(elapsed * 1.4 + person.position.x) * 0.045;
+          }
+          for (const coin of coins) {
+            coin.rotation.y = elapsed * 2 + coin.userData.phase;
+            coin.position.y = 0.65 + Math.abs(Math.sin(elapsed * 1.3 + coin.userData.phase)) * 1.3;
+          }
+          for (let i = fireworks.length - 1; i >= 0; i--) {
+            const firework = fireworks[i];
+            firework.age += delta;
+            const drag = Math.pow(0.55, delta);
+            for (let j = 0; j < firework.positions.length / 3; j++) {
+              const offset = j * 3;
+              firework.velocities[offset + 1] -= 1.8 * delta;
+              firework.velocities[offset] *= drag;
+              firework.velocities[offset + 1] *= drag;
+              firework.velocities[offset + 2] *= drag;
+              firework.positions[offset] += firework.velocities[offset] * delta;
+              firework.positions[offset + 1] += firework.velocities[offset + 1] * delta;
+              firework.positions[offset + 2] += firework.velocities[offset + 2] * delta;
+            }
+            firework.points.geometry.attributes.position.needsUpdate = true;
+            firework.points.material.opacity = 1 - firework.age / firework.life;
+            if (firework.age >= firework.life) {
+              scene.remove(firework.points);
+              firework.points.geometry.dispose();
+              firework.points.material.dispose();
+              fireworks.splice(i, 1);
+            }
+          }
+          if (!reducedMotion && elapsed - lastLaunch > 5.5) {
+            launchFirework();
+            lastLaunch = elapsed;
+          }
+          renderer.render(scene, camera);
+        }
+        animate();
+      }
+    </script>
+  </body>
+</html>
