@@ -484,7 +484,7 @@
   <body>
     <main>
       <section class="celebration" aria-labelledby="page-title">
-        <canvas id="diwali-scene" aria-hidden="true"></canvas>
+        <canvas id="diwali-scene" aria-hidden="true" data-engine="three.js r169" width="1343" height="628"></canvas>
 
         <div class="welcome-screen" id="welcome-screen">
           <div class="welcome-curtain welcome-curtain-left" aria-hidden="true"></div>
@@ -700,8 +700,14 @@
           window: material("#ffd06c", 0.3, { emissive: "#ff9f31", emissiveIntensity: 1.6 }),
           leaf: material("#276947"),
           pot: material("#b8583e"),
+          basket: material("#985333", 0.74),
           bowl: material("#bd642e", 0.42, { metalness: 0.2 }),
           gold: material("#ffce59", 0.32, { metalness: 0.7 }),
+          fruitOrange: material("#ed7437", 0.42),
+          fruitMango: material("#f4bd45", 0.45),
+          fruitRed: material("#bf3d45", 0.4),
+          fruitPurple: material("#754574", 0.38),
+          smoke: new THREE.MeshBasicMaterial({ color: "#d8d1d1", transparent: true, opacity: 0.35 }),
           skin: material("#e9ad78"),
           hair: material("#241a24"),
           silverHair: material("#e8dfd1"),
@@ -810,12 +816,23 @@
         roof.castShadow = true;
         roof.receiveShadow = true;
         house.add(roof);
+        const chimneyX = 3.25;
+        box(0.66, 1.78, 0.76, material("#8d443a"), chimneyX, 5.72, 0.1, house);
+        box(0.88, 0.17, 0.94, mats.trim, chimneyX, 6.66, 0.1, house);
+        box(0.4, 0.07, 0.57, mats.door, chimneyX, 6.77, 0.17, house);
+        const chimneySmoke = [];
+        for (let i = 0; i < 5; i++) {
+          const puff = sphere(0.17, mats.smoke.clone(), chimneyX, 6.95 + i * 0.3, 0.2, house, [1.2, 0.85, 1]);
+          puff.userData.phase = i * 1.15;
+          puff.userData.startY = puff.position.y;
+          chimneySmoke.push(puff);
+        }
         box(8.7, 0.16, 0.9, mats.trim, 0, 4.2, 0.04, house);
         box(1.65, 2.75, 0.2, mats.door, 0, 1.38, 0.42, house);
         box(1.83, 0.16, 0.28, mats.trim, 0, 2.78, 0.43, house);
         sphere(0.08, mats.gold, 0.55, 1.35, 0.56, house);
 
-        for (const x of [-2.7, 2.7]) {
+        for (const x of [-3.35, 3.35]) {
           box(1.25, 1.35, 0.18, mats.trim, x, 2.48, 0.42, house);
           box(0.96, 1.08, 0.12, mats.window, x, 2.48, 0.54, house);
           box(0.09, 1.08, 0.14, mats.trim, x, 2.48, 0.63, house);
@@ -823,7 +840,19 @@
         }
 
         const frameColors = ["#d6634c", "#e7a43a", "#8d5bb5"];
-        const frameTitles = ["श्री गणेश", "राम दरबार", "श्री लक्ष्मी"];
+        const frameTitles = ["शुभ लाभ", "राम दरबार", "श्री लक्ष्मी"];
+        const photoTexture = new THREE.TextureLoader().load(
+          "./assets/laxmi-ganesh.webp",
+          (texture) => {
+            texture.colorSpace = THREE.SRGBColorSpace;
+          },
+          undefined,
+          (error) => {
+            console.error("Could not load the Lakshmi-Ganesh wall photo.", error);
+            status.textContent = "The Lakshmi-Ganesh wall photo could not load.";
+          }
+        );
+        photoTexture.colorSpace = THREE.SRGBColorSpace;
         for (let i = 0; i < frameTitles.length; i++) {
           const art = document.createElement("canvas");
           art.width = 512;
@@ -846,17 +875,187 @@
           const texture = new THREE.CanvasTexture(art);
           texture.colorSpace = THREE.SRGBColorSpace;
           const x = (i - 1) * 2.55;
-          const width = i === 1 ? 1.95 : 1.48;
-          const height = i === 1 ? 1.48 : 1.13;
+          const width = i === 1 ? 1.95 : (i === 0 ? 1.62 : 1.48);
+          const height = i === 1 ? 1.48 : (i === 0 ? 1.08 : 1.13);
           const y = i === 1 ? 3.38 : 3.55;
           box(width + 0.2, height + 0.2, 0.12, mats.gold, x, y, 0.47, house);
           const image = new THREE.Mesh(
             new THREE.PlaneGeometry(width, height),
-            new THREE.MeshBasicMaterial({ map: texture })
+            new THREE.MeshBasicMaterial({ map: i === 0 ? photoTexture : texture })
           );
           image.position.set(x, y, 0.55);
           house.add(image);
         }
+
+        const frontGarlandCurve = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(-3.9, 4.46, 0.64),
+          new THREE.Vector3(-2.6, 4.27, 0.68),
+          new THREE.Vector3(-1.3, 4.16, 0.7),
+          new THREE.Vector3(0, 4.12, 0.7),
+          new THREE.Vector3(1.3, 4.16, 0.7),
+          new THREE.Vector3(2.6, 4.27, 0.68),
+          new THREE.Vector3(3.9, 4.46, 0.64)
+        ]);
+        house.add(new THREE.Mesh(
+          new THREE.TubeGeometry(frontGarlandCurve, 36, 0.045, 6, false),
+          material("#dc813d")
+        ));
+        for (let i = 0; i <= 16; i++) {
+          const x = -3.8 + i * 0.475;
+          const y = 4.12 + Math.abs(x) * 0.09;
+          sphere(0.105, i % 2 ? mats.gold : mats.fruitOrange, x, y, 0.72, house, [0.85, 1, 0.85]);
+          if (i % 2 === 0) {
+            const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.2, 5), mats.leaf);
+            leaf.position.set(x + 0.08, y - 0.12, 0.72);
+            leaf.rotation.z = Math.PI / 2;
+            house.add(leaf);
+          }
+        }
+
+        const potX = 4.08;
+        const potY = 3.62;
+        const potZ = 0.74;
+        const potBody = new THREE.Mesh(
+          new THREE.LatheGeometry([
+            new THREE.Vector2(0.12, 0),
+            new THREE.Vector2(0.29, 0.08),
+            new THREE.Vector2(0.41, 0.27),
+            new THREE.Vector2(0.41, 0.48),
+            new THREE.Vector2(0.31, 0.62),
+            new THREE.Vector2(0.25, 0.53),
+            new THREE.Vector2(0.3, 0.3),
+            new THREE.Vector2(0.22, 0.13),
+            new THREE.Vector2(0.12, 0.12)
+          ], 20),
+          mats.gold
+        );
+        potBody.position.set(potX, potY, potZ);
+        potBody.castShadow = true;
+        house.add(potBody);
+        box(0.6, 0.14, 0.12, mats.gold, potX, potY + 0.08, potZ - 0.12, house);
+        const potRim = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.055, 8, 24), mats.trim);
+        potRim.rotation.x = Math.PI / 2;
+        potRim.position.set(potX, potY + 0.59, potZ);
+        house.add(potRim);
+        for (const bandY of [0.2, 0.43]) {
+          const band = new THREE.Mesh(new THREE.TorusGeometry(bandY === 0.2 ? 0.37 : 0.36, 0.035, 6, 20), mats.trim);
+          band.rotation.x = Math.PI / 2;
+          band.position.set(potX, potY + bandY, potZ);
+          house.add(band);
+        }
+        for (const side of [-1, 1]) {
+          const handle = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.035, 6, 16), mats.trim);
+          handle.position.set(potX + side * 0.39, potY + 0.39, potZ - 0.02);
+          house.add(handle);
+        }
+        sphere(0.3, mats.gold, potX, potY + 0.6, potZ + 0.015, house, [1, 0.42, 0.78]);
+        for (let i = 0; i < 5; i++) {
+          const coinOnTop = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.105, 0.105, 0.035, 12),
+            mats.gold
+          );
+          coinOnTop.position.set(potX - 0.2 + i * 0.1, potY + 0.68 + (i % 2) * 0.045, potZ + 0.15);
+          coinOnTop.rotation.x = Math.PI / 2;
+          coinOnTop.rotation.z = (i % 2 ? 1 : -1) * 0.18;
+          house.add(coinOnTop);
+        }
+
+        function makeFruitBasket(x, z, seed) {
+          const basket = new THREE.Group();
+          basket.position.set(x, 0, z);
+          basket.scale.setScalar(1.15);
+          scene.add(basket);
+          const weave = new THREE.Mesh(
+            new THREE.LatheGeometry([
+              new THREE.Vector2(0.12, 0),
+              new THREE.Vector2(0.4, 0),
+              new THREE.Vector2(0.56, 0.2),
+              new THREE.Vector2(0.58, 0.38),
+              new THREE.Vector2(0.47, 0.36),
+              new THREE.Vector2(0.42, 0.16),
+              new THREE.Vector2(0.12, 0.12)
+            ], 16),
+            mats.basket
+          );
+          weave.position.y = 0.05;
+          basket.add(weave);
+          for (const y of [0.2, 0.37]) {
+            const trim = new THREE.Mesh(new THREE.TorusGeometry(y === 0.2 ? 0.49 : 0.55, 0.035, 6, 20), mats.trim);
+            trim.rotation.x = Math.PI / 2;
+            trim.position.set(0, y, 0);
+            basket.add(trim);
+          }
+          const handle = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.035, 6, 18, Math.PI), mats.trim);
+          handle.position.set(0, 0.34, 0);
+          basket.add(handle);
+
+          const fruit = [
+            { x: -0.24, y: 0.52, z: 0.03, mat: mats.fruitOrange, scale: [1, 1, 1] },
+            { x: 0.18, y: 0.54, z: 0.04, mat: mats.fruitRed, scale: [0.9, 1, 0.9] },
+            { x: 0, y: 0.65, z: -0.19, mat: mats.fruitMango, scale: [1.3, 0.78, 0.8] },
+            { x: -0.31, y: 0.67, z: -0.18, mat: mats.fruitMango, scale: [1.15, 0.7, 0.8] },
+            { x: 0.3, y: 0.67, z: -0.17, mat: mats.fruitPurple, scale: [0.9, 0.78, 0.9] }
+          ];
+          for (const piece of fruit) {
+            const item = sphere(0.19, piece.mat, piece.x, piece.y, piece.z, basket, piece.scale);
+            item.userData.seed = seed;
+          }
+          for (let i = 0; i < 5; i++) {
+            const grape = sphere(0.085, mats.fruitPurple, 0.29 + (i % 2) * 0.11, 0.48 + i * 0.08, -0.12, basket);
+            grape.scale.setScalar(0.9 + (i % 3) * 0.1);
+          }
+          for (let i = 0; i < 3; i++) {
+            const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.3, 5), mats.leaf);
+            leaf.position.set(-0.2 + i * 0.2, 0.81 + (i % 2) * 0.05, -0.1);
+            leaf.rotation.z = Math.PI / 2 + i * 0.4;
+            basket.add(leaf);
+          }
+          for (let i = 0; i < 6; i++) {
+            const flower = sphere(
+              0.055,
+              i % 2 ? mats.gold : mats.fruitOrange,
+              Math.cos(i * Math.PI / 3) * 0.49,
+              0.27,
+              Math.sin(i * Math.PI / 3) * 0.49,
+              basket
+            );
+            flower.scale.set(1, 0.75, 1);
+          }
+        }
+        makeFruitBasket(-4.65, 1.45, 1);
+        makeFruitBasket(4.65, 1.45, 2);
+
+        const coins = [];
+        const coinGeometry = new THREE.CylinderGeometry(0.11, 0.11, 0.035, 12);
+        const coinStartY = potY + 0.45;
+        const coinEndY = 0.48;
+        for (let i = 0; i < 20; i++) {
+          const coin = new THREE.Mesh(coinGeometry, mats.gold);
+          coin.position.set(
+            potX + (Math.random() - 0.5) * 0.36,
+            coinEndY + Math.random() * (coinStartY - coinEndY),
+            potZ + 0.28 + Math.random() * 0.08
+          );
+          coin.rotation.x = Math.PI / 2;
+          coin.rotation.z = Math.random() * Math.PI;
+          coin.castShadow = true;
+          coin.userData.phase = Math.random() * Math.PI * 2;
+          coin.userData.speed = 1.5 + Math.random() * 1.2;
+          coin.userData.offset = coin.position.x - potX;
+          house.add(coin);
+          coins.push(coin);
+        }
+        for (let i = 0; i < 9; i++) {
+          const fallenCoin = new THREE.Mesh(coinGeometry, mats.gold);
+          fallenCoin.position.set(
+            potX + (Math.random() - 0.5) * 1.15,
+            0.08 + Math.random() * 0.16,
+            potZ + (Math.random() - 0.5) * 0.65
+          );
+          fallenCoin.rotation.set(Math.PI / 2, 0, Math.random() * Math.PI);
+          house.add(fallenCoin);
+        }
+        house.scale.set(1.28, 1.18, 1.05);
 
         function drawRamDarbar(ctx) {
           const { width, height } = ctx.canvas;
@@ -1294,20 +1493,6 @@
         makePerson(-3.65, 0.95, 1.8, "#e29c35", { sparkler: true });
         makePerson(3.55, 0.95, 1.85, "#4384a0", { sparkler: true });
 
-        cylinder(0.47, 0.36, 0.62, mats.gold, 5.1, 0.37, 1.35);
-        sphere(0.17, mats.gold, 5.1, 0.78, 1.35, scene, [1.2, 0.65, 1.2]);
-        const coinGeometry = new THREE.CylinderGeometry(0.12, 0.12, 0.035, 12);
-        const coinMaterial = mats.gold;
-        const coins = [];
-        for (let i = 0; i < 12; i++) {
-          const coin = new THREE.Mesh(coinGeometry, coinMaterial);
-          coin.position.set(5.1 + (Math.random() - 0.5) * 0.7, 1.1 + Math.random() * 2, 1.35 + (Math.random() - 0.5) * 0.5);
-          coin.castShadow = true;
-          coin.userData.phase = Math.random() * Math.PI * 2;
-          scene.add(coin);
-          coins.push(coin);
-        }
-
         const fireworks = [];
         function launchFirework() {
           const count = 38;
@@ -1423,7 +1608,7 @@
           const height = canvas.clientHeight;
           if (!width || !height) return;
           camera.aspect = width / height;
-          const nextStartingDistance = Math.max(13, 12.2 / camera.aspect);
+          const nextStartingDistance = Math.max(13, 14.2 / camera.aspect);
           if (hasResized) {
             const zoomRatio = cameraDistance / startingCameraDistance;
             startingCameraDistance = nextStartingDistance;
@@ -1465,6 +1650,14 @@
           for (const person of people) {
             person.rotation.y = Math.sin(elapsed * 1.4 + person.position.x) * 0.045;
           }
+          for (const puff of chimneySmoke) {
+            const drift = (elapsed * 0.22 + puff.userData.phase / 5) % 1;
+            puff.position.y = puff.userData.startY + drift * 0.95;
+            puff.position.x = chimneyX + Math.sin(elapsed * 0.7 + puff.userData.phase) * 0.16;
+            puff.position.z = 0.2 + drift * 0.1;
+            puff.material.opacity = 0.32 * (1 - drift);
+            puff.scale.setScalar(0.75 + drift * 0.85);
+          }
           for (const tree of gardenTrees) {
             for (const light of tree.userData.lights) {
               const glow = 0.8 + (Math.sin(elapsed * 2.2 + light.phase) + 1) * 0.75;
@@ -1478,8 +1671,14 @@
             sparkler.spark.scale.setScalar(0.75 + Math.random() * 0.8);
           }
           for (const coin of coins) {
-            coin.rotation.y = elapsed * 2 + coin.userData.phase;
-            coin.position.y = 0.65 + Math.abs(Math.sin(elapsed * 1.3 + coin.userData.phase)) * 1.3;
+            coin.position.y -= delta * coin.userData.speed;
+            coin.position.x = potX + coin.userData.offset + Math.sin(elapsed * 3 + coin.userData.phase) * 0.09;
+            coin.rotation.z += delta * (2.8 + coin.userData.speed);
+            coin.rotation.y = Math.sin(elapsed * 4 + coin.userData.phase) * 0.45;
+            if (coin.position.y < coinEndY) {
+              coin.position.y = coinStartY + Math.random() * 0.18;
+              coin.userData.offset = (Math.random() - 0.5) * 0.36;
+            }
           }
           for (let i = fireworks.length - 1; i >= 0; i--) {
             const firework = fireworks[i];
