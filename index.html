@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#100719">
-    <meta name="description" content="A little 3D Diwali celebration, made with light and love.">
-    <meta property="og:title" content="Shubh Deepavali | Wishes by Krishraj Shukla">
-    <meta property="og:description" content="A little 3D Diwali celebration, made with light and love. Tap to see a wish.">
+    <meta name="description" content="A Diwali evening with family, sparkling lights, and wishes for the people who make a house a home.">
+    <meta property="og:title" content="Diwali, Together | Wishes by Krishraj Shukla">
+    <meta property="og:description" content="Bring the family together for a little 3D Diwali celebration.">
     <title>Shubh Deepavali | Wishes by Krishraj Shukla</title>
     <style>
       :root {
@@ -115,7 +115,7 @@
       }
 
       .hero-copy {
-        top: 12%;
+        top: 9%;
         left: 50%;
         width: min(680px, calc(100% - 36px));
         text-align: center;
@@ -137,7 +137,7 @@
       h1 {
         margin: 0;
         color: #fff2ca;
-        font-size: clamp(2.4rem, 6vw, 4.4rem);
+        font-size: clamp(2.4rem, 5.2vw, 3.7rem);
         font-weight: 400;
         line-height: 1.08;
       }
@@ -182,6 +182,7 @@
         text-align: center;
         transform: translateX(-50%);
         backdrop-filter: blur(8px);
+        pointer-events: none;
       }
 
       .wish-card p {
@@ -226,7 +227,7 @@
         }
 
         .hero-copy {
-          top: 11%;
+          top: 9%;
         }
 
         .wish-card {
@@ -271,10 +272,11 @@
         </header>
 
         <div class="hero-copy" id="home">
-          <p class="eyebrow">A little light goes a long way</p>
+          <p class="eyebrow">The brightest light is being together</p>
           <h1 id="page-title">शुभ <span>दीपावली</span></h1>
           <p class="intro">
-            Is roshni bhari shaam par, apno ke saath baantein khushi, pyaar aur ek nayi umeed.
+            Dadi-Nana ki duaayein, Maa-Papa ki muskaan, aur bachchon ki hansi.
+            Aaj ki shaam, sab apno ke naam.
           </p>
         </div>
 
@@ -282,7 +284,7 @@
           <p id="wish">इस दिवाली हर अंधेरा छोटा पड़ जाए।</p>
         </div>
         <p class="scene-hint" id="scene-status">
-          Ghar ko dekhne ke liye drag karein · ek nayi wish ke liye tap karein
+          Ghar ko ghumane ke liye drag karein · wish aur aasmaan mein roshni ke liye tap karein
         </p>
       </section>
 
@@ -298,11 +300,15 @@
       const status = document.querySelector("#scene-status");
       const wishes = [
         "इस दिवाली हर अंधेरा छोटा पड़ जाए।",
-        "एक दीया उनके नाम, जो बिना कहे हमारे साथ रहे।",
-        "रोशनी सिर्फ़ घर में नहीं, मन में भी जले।",
-        "खुशियाँ इतनी हों कि बाँटने पर भी कम न पड़ें।",
-        "जो इस साल थक गए हैं, उनके लिए एक नई सुबह जैसी दिवाली।",
-        "पटाखों से ज़्यादा आवाज़ हँसी की हो।"
+        "घर की सबसे प्यारी रोशनी — अपनों के चेहरे।",
+        "एक दीया उन बड़ों के नाम, जिनकी दुआओं से घर घर बनता है।",
+        "माँ-पापा की मुस्कान और बच्चों की हँसी — बस इतनी-सी दिवाली चाहिए।",
+        "जो साथ बैठे हैं, वही इस त्योहार की सबसे बड़ी दौलत हैं।",
+        "बच्चों की आँखों का उत्साह, बड़ों के दिल का सुकून — शुभ दीपावली।",
+        "इस घर में मिठास बातों में हो, और रोशनी हर दिल में।",
+        "एक दीया उनके लिए भी, जो इस साल हमारे पास नहीं, पर दिल में हैं।",
+        "पटाखों से ज़्यादा गूँजे परिवार की हँसी।",
+        "सबसे खूबसूरत तोहफ़ा: आज थोड़ा और वक़्त, अपने लोगों के साथ।"
       ];
       let wishIndex = 1;
       let celebrate = () => {};
@@ -359,8 +365,8 @@
         const canvas = document.querySelector("#diwali-scene");
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color("#100719");
-        scene.fog = new THREE.Fog("#21102f", 18, 38);
+        scene.background = new THREE.Color("#101326");
+        scene.fog = new THREE.Fog("#242039", 22, 42);
 
         const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
         const renderer = new THREE.WebGLRenderer({
@@ -375,8 +381,8 @@
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.25;
 
-        scene.add(new THREE.HemisphereLight("#c9bcff", "#32152c", 2.1));
-        const moonLight = new THREE.DirectionalLight("#ffe6b1", 3);
+        scene.add(new THREE.HemisphereLight("#d2c2ff", "#273d36", 2.4));
+        const moonLight = new THREE.DirectionalLight("#ffe9c2", 3.2);
         moonLight.position.set(-5, 10, 7);
         moonLight.castShadow = true;
         moonLight.shadow.mapSize.set(1024, 1024);
@@ -388,7 +394,10 @@
           ...extra
         });
         const mats = {
-          ground: material("#38243d"),
+          ground: material("#29243a"),
+          grass: material("#31543b"),
+          grassLight: material("#4e7650"),
+          bark: material("#70452f"),
           wall: material("#9e543e"),
           trim: material("#ffcf72", 0.55, { metalness: 0.35 }),
           roof: material("#57233a"),
@@ -400,6 +409,9 @@
           gold: material("#ffce59", 0.32, { metalness: 0.7 }),
           skin: material("#e9ad78"),
           hair: material("#241a24"),
+          silverHair: material("#e8dfd1"),
+          blush: material("#db826e"),
+          smile: material("#63343b"),
           white: material("#f9e9c7")
         };
         const box = (w, h, d, mat, x, y, z, parent = scene) => {
@@ -451,6 +463,41 @@
         );
         scene.add(stars);
 
+        const lawnPatch = new THREE.Mesh(
+          new THREE.PlaneGeometry(19, 8),
+          material("#243a31", 1)
+        );
+        lawnPatch.rotation.x = -Math.PI / 2;
+        lawnPatch.position.set(0, -0.045, 4.1);
+        scene.add(lawnPatch);
+
+        const bladeGeometry = new THREE.ConeGeometry(0.045, 0.42, 4);
+        const grassMeshes = [mats.grass, mats.grassLight].map((bladeMaterial) => {
+          const mesh = new THREE.InstancedMesh(bladeGeometry, bladeMaterial, 125);
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+          scene.add(mesh);
+          return mesh;
+        });
+        const grassDummy = new THREE.Object3D();
+        for (const mesh of grassMeshes) {
+          for (let i = 0; i < mesh.count; i++) {
+            let x = 0;
+            let z = 0;
+            do {
+              x = (Math.random() - 0.5) * 17;
+              z = 0.3 + Math.random() * 7.2;
+            } while (Math.abs(x) < 4.7 && z < 5.2);
+            const height = 0.55 + Math.random() * 0.6;
+            grassDummy.position.set(x, height / 2 - 0.02, z);
+            grassDummy.rotation.set((Math.random() - 0.5) * 0.2, Math.random() * Math.PI, (Math.random() - 0.5) * 0.22);
+            grassDummy.scale.set(0.75 + Math.random() * 0.8, height, 0.75 + Math.random() * 0.8);
+            grassDummy.updateMatrix();
+            mesh.setMatrixAt(i, grassDummy.matrix);
+          }
+          mesh.instanceMatrix.needsUpdate = true;
+        }
+
         const house = new THREE.Group();
         house.position.z = -4;
         scene.add(house);
@@ -481,33 +528,242 @@
         }
 
         const frameColors = ["#d6634c", "#e7a43a", "#8d5bb5"];
-        const frameTitles = ["श्री गणेश", "श्री लक्ष्मी", "राम दरबार"];
+        const frameTitles = ["श्री गणेश", "राम दरबार", "श्री लक्ष्मी"];
         for (let i = 0; i < frameTitles.length; i++) {
           const art = document.createElement("canvas");
-          art.width = 256;
-          art.height = 192;
+          art.width = 512;
+          art.height = 384;
           const ctx = art.getContext("2d");
-          const gradient = ctx.createLinearGradient(0, 0, 0, 192);
-          gradient.addColorStop(0, "#ffe8a6");
-          gradient.addColorStop(1, frameColors[i]);
-          ctx.fillStyle = gradient;
-          ctx.fillRect(0, 0, 256, 192);
-          ctx.fillStyle = "#5b293c";
-          ctx.font = "bold 30px serif";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(frameTitles[i], 128, 96);
+          if (i === 1) {
+            drawRamDarbar(ctx);
+          } else {
+            const gradient = ctx.createLinearGradient(0, 0, 0, art.height);
+            gradient.addColorStop(0, "#ffe8a6");
+            gradient.addColorStop(1, frameColors[i]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, art.width, art.height);
+            ctx.fillStyle = "#5b293c";
+            ctx.font = "bold 52px serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(frameTitles[i], art.width / 2, art.height / 2);
+          }
           const texture = new THREE.CanvasTexture(art);
           texture.colorSpace = THREE.SRGBColorSpace;
-          const x = (i - 1) * 2.25;
-          box(1.48, 1.13, 0.12, mats.gold, x, 3.75, 0.47, house);
+          const x = (i - 1) * 2.55;
+          const width = i === 1 ? 1.95 : 1.48;
+          const height = i === 1 ? 1.48 : 1.13;
+          const y = i === 1 ? 3.38 : 3.55;
+          box(width + 0.2, height + 0.2, 0.12, mats.gold, x, y, 0.47, house);
           const image = new THREE.Mesh(
-            new THREE.PlaneGeometry(1.28, 0.93),
+            new THREE.PlaneGeometry(width, height),
             new THREE.MeshBasicMaterial({ map: texture })
           );
-          image.position.set(x, 3.75, 0.55);
+          image.position.set(x, y, 0.55);
           house.add(image);
         }
+
+        function drawRamDarbar(ctx) {
+          const { width, height } = ctx.canvas;
+          const sky = ctx.createLinearGradient(0, 0, 0, height);
+          sky.addColorStop(0, "#fff1bd");
+          sky.addColorStop(0.56, "#efa564");
+          sky.addColorStop(1, "#98384e");
+          ctx.fillStyle = sky;
+          ctx.fillRect(0, 0, width, height);
+
+          ctx.strokeStyle = "#a45036";
+          ctx.lineWidth = 13;
+          ctx.beginPath();
+          ctx.moveTo(40, height - 12);
+          ctx.lineTo(40, 138);
+          ctx.quadraticCurveTo(256, -48, 472, 138);
+          ctx.lineTo(472, height - 12);
+          ctx.stroke();
+          ctx.strokeStyle = "#ffdf85";
+          ctx.lineWidth = 5;
+          ctx.beginPath();
+          ctx.moveTo(57, height - 18);
+          ctx.lineTo(57, 143);
+          ctx.quadraticCurveTo(256, -16, 455, 143);
+          ctx.lineTo(455, height - 18);
+          ctx.stroke();
+
+          const halo = ctx.createRadialGradient(252, 183, 15, 252, 183, 145);
+          halo.addColorStop(0, "rgb(255 246 196 / 95%)");
+          halo.addColorStop(1, "rgb(255 217 121 / 0%)");
+          ctx.fillStyle = halo;
+          ctx.beginPath();
+          ctx.arc(252, 183, 145, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#73354b";
+          ctx.fillRect(96, 316, 320, 24);
+          ctx.fillStyle = "#e7a64e";
+          ctx.fillRect(112, 291, 288, 25);
+          ctx.fillStyle = "#f4cf77";
+          ctx.fillRect(128, 276, 256, 14);
+
+          function drawPerson(x, baseY, scale, skinColor, robeColor, crownColor, seated) {
+            ctx.save();
+            ctx.translate(x, baseY);
+            ctx.scale(scale, scale);
+
+            ctx.fillStyle = robeColor;
+            ctx.beginPath();
+            if (seated) {
+              ctx.ellipse(0, -16, 37, 21, 0, 0, Math.PI * 2);
+            } else {
+              ctx.moveTo(-26, -76);
+              ctx.lineTo(25, -76);
+              ctx.lineTo(34, 0);
+              ctx.lineTo(-34, 0);
+              ctx.closePath();
+            }
+            ctx.fill();
+
+            ctx.strokeStyle = "#f9d775";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(-23, -32);
+            ctx.quadraticCurveTo(0, -14, 23, -32);
+            ctx.stroke();
+
+            ctx.fillStyle = skinColor;
+            ctx.beginPath();
+            ctx.arc(0, -99, 22, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#35202c";
+            ctx.beginPath();
+            ctx.arc(0, -108, 23, Math.PI, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = crownColor;
+            ctx.beginPath();
+            ctx.moveTo(-21, -115);
+            ctx.lineTo(-14, -145);
+            ctx.lineTo(0, -133);
+            ctx.lineTo(13, -150);
+            ctx.lineTo(22, -115);
+            ctx.closePath();
+            ctx.fill();
+            ctx.fillStyle = "#fff0b0";
+            ctx.beginPath();
+            ctx.arc(0, -130, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#38232c";
+            ctx.beginPath();
+            ctx.arc(-7, -99, 2.5, 0, Math.PI * 2);
+            ctx.arc(7, -99, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#8b3b40";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(0, -90, 7, 0.15, Math.PI - 0.15);
+            ctx.stroke();
+
+            ctx.strokeStyle = skinColor;
+            ctx.lineWidth = 10;
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            ctx.moveTo(-21, -73);
+            ctx.lineTo(-39, -43);
+            ctx.moveTo(21, -73);
+            ctx.lineTo(39, -43);
+            ctx.stroke();
+            ctx.restore();
+          }
+
+          drawPerson(186, 302, 0.9, "#df9a67", "#28776e", "#d59832", true);
+          drawPerson(277, 302, 0.82, "#eeb489", "#c84c64", "#e5b341", true);
+          drawPerson(385, 303, 0.72, "#df9a67", "#358067", "#d99b37", false);
+
+          ctx.strokeStyle = "#83452d";
+          ctx.lineWidth = 6;
+          ctx.beginPath();
+          ctx.moveTo(413, 138);
+          ctx.quadraticCurveTo(467, 204, 414, 275);
+          ctx.stroke();
+          ctx.fillStyle = "#f8da88";
+          ctx.beginPath();
+          ctx.arc(413, 138, 6, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#df9a67";
+          ctx.beginPath();
+          ctx.ellipse(116, 288, 31, 15, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#be4b42";
+          ctx.beginPath();
+          ctx.arc(116, 262, 15, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = "#f1c179";
+          ctx.lineWidth = 6;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(107, 258);
+          ctx.lineTo(116, 237);
+          ctx.lineTo(125, 258);
+          ctx.stroke();
+
+          ctx.fillStyle = "#ffd986";
+          ctx.font = "bold 29px serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("श्री राम दरबार", width / 2, 42);
+          ctx.strokeStyle = "#ffe4a0";
+          ctx.lineWidth = 3;
+          ctx.strokeRect(10, 10, width - 20, height - 20);
+        }
+
+        const shubhLabhCanvas = document.createElement("canvas");
+        shubhLabhCanvas.width = 512;
+        shubhLabhCanvas.height = 160;
+        const shubhLabhContext = shubhLabhCanvas.getContext("2d");
+        shubhLabhContext.fillStyle = "#f6d78e";
+        shubhLabhContext.fillRect(0, 0, 512, 160);
+        shubhLabhContext.strokeStyle = "#a33d36";
+        shubhLabhContext.lineWidth = 9;
+        shubhLabhContext.strokeRect(8, 8, 496, 144);
+        shubhLabhContext.textAlign = "center";
+        shubhLabhContext.textBaseline = "middle";
+        function drawSwastika(ctx, x, y, size) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.strokeStyle = "#9c2935";
+          ctx.lineWidth = size * 0.22;
+          ctx.lineCap = "square";
+          ctx.lineJoin = "miter";
+          ctx.beginPath();
+          for (let quarterTurn = 0; quarterTurn < 4; quarterTurn++) {
+            ctx.save();
+            ctx.rotate(quarterTurn * Math.PI / 2);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -size);
+            ctx.lineTo(size * 0.5, -size);
+            ctx.restore();
+          }
+          ctx.stroke();
+          ctx.fillStyle = "#9c2935";
+          for (const [dotX, dotY] of [[-size, -size], [size, -size], [-size, size], [size, size]]) {
+            ctx.beginPath();
+            ctx.arc(dotX, dotY, size * 0.08, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+        drawSwastika(shubhLabhContext, 64, 80, 27);
+        drawSwastika(shubhLabhContext, 448, 80, 27);
+        shubhLabhContext.font = "bold 58px serif";
+        shubhLabhContext.fillText("शुभ लाभ", 256, 80);
+        const shubhLabhTexture = new THREE.CanvasTexture(shubhLabhCanvas);
+        shubhLabhTexture.colorSpace = THREE.SRGBColorSpace;
+        const shubhLabhSign = new THREE.Mesh(
+          new THREE.PlaneGeometry(1.38, 0.43),
+          new THREE.MeshBasicMaterial({ map: shubhLabhTexture })
+        );
+        shubhLabhSign.position.set(0, 2.15, 0.57);
+        house.add(shubhLabhSign);
 
         const garlandCurve = new THREE.QuadraticBezierCurve3(
           new THREE.Vector3(-3.85, 4.05, 0.54),
@@ -599,16 +855,125 @@
         }
         makePlant(-5.4, -0.6);
         makePlant(5.4, -0.6);
+        makePlant(-5.9, 2.4);
+        makePlant(5.9, 2.4);
+
+        function makeGardenTree(x, z, scale = 1) {
+          const tree = new THREE.Group();
+          tree.position.set(x, 0, z);
+          tree.scale.setScalar(scale);
+          scene.add(tree);
+          cylinder(0.22, 0.38, 2.2, mats.bark, 0, 1.1, 0, tree, 9);
+          const canopyPoints = [
+            [-0.75, 2.45, 0, 1.05],
+            [0.2, 2.9, 0.1, 1.2],
+            [0.95, 2.55, -0.05, 0.95],
+            [-0.12, 3.65, -0.1, 0.9],
+            [0.55, 3.45, 0.3, 0.72]
+          ];
+          for (let i = 0; i < canopyPoints.length; i++) {
+            const [leafX, leafY, leafZ, radius] = canopyPoints[i];
+            sphere(radius, i % 2 ? mats.grassLight : mats.leaf, leafX, leafY, leafZ, tree);
+          }
+          const marigold = [material("#f5a63b", 0.6), material("#e66b44", 0.58), mats.gold];
+          for (let i = 0; i < 13; i++) {
+            const angle = (i / 13) * Math.PI * 2;
+            const flower = sphere(
+              0.12,
+              marigold[i % marigold.length],
+              Math.cos(angle) * (0.76 + Math.random() * 0.2),
+              2.45 + Math.sin(angle * 2) * 0.45,
+              Math.sin(angle) * 0.72,
+              tree
+            );
+            flower.scale.set(1, 0.75, 1);
+          }
+          const lights = [];
+          for (let i = 0; i < 9; i++) {
+            const angle = (i / 9) * Math.PI * 2;
+            const light = sphere(
+              0.075,
+              material("#ffe19a", 0.4, { emissive: "#ff9f3f", emissiveIntensity: 2 }),
+              Math.cos(angle) * 0.92,
+              2.6 + Math.sin(angle * 2) * 0.38,
+              Math.sin(angle) * 0.68,
+              tree
+            );
+            lights.push({ mesh: light, phase: i * 0.75 });
+          }
+          tree.userData.lights = lights;
+          const glow = new THREE.PointLight("#ffb354", 1.2, 5);
+          glow.position.set(0, 3, 0.5);
+          tree.add(glow);
+          return tree;
+        }
+        const gardenTrees = [
+          makeGardenTree(-5.2, -2.5, 0.92),
+          makeGardenTree(5.2, -2.5, 0.92),
+          makeGardenTree(-5.7, 1.7, 0.58),
+          makeGardenTree(5.7, 1.7, 0.58)
+        ];
 
         const people = [];
-        function makePerson(x, z, height, clothes, holdingSparkler = false) {
+        const sparklerLights = [];
+        function makePerson(x, z, height, clothes, options = {}) {
           const person = new THREE.Group();
           person.position.set(x, 0, z);
           scene.add(person);
           const bodyHeight = height * 0.43;
-          cylinder(height * 0.14, height * 0.2, bodyHeight, material(clothes), 0, height * 0.48, 0, person, 8);
+          const outfit = material(clothes);
+          cylinder(height * 0.14, height * 0.2, bodyHeight, outfit, 0, height * 0.48, 0, person, 8);
           sphere(height * 0.15, mats.skin, 0, height * 0.83, 0, person);
-          sphere(height * 0.16, mats.hair, 0, height * 0.94, -0.015, person, [1, 0.48, 0.95]);
+          sphere(height * 0.16, options.elder ? mats.silverHair : mats.hair, 0, height * 0.94, -0.015, person, [1, 0.48, 0.95]);
+          const featureScale = height / 2.5;
+          for (const eyeX of [-0.05, 0.05]) {
+            sphere(0.024 * featureScale, mats.white, eyeX * height, height * 0.846, height * 0.132, person);
+            sphere(0.013 * featureScale, mats.hair, eyeX * height, height * 0.846, height * 0.151, person);
+            const brow = new THREE.Mesh(
+              new THREE.TubeGeometry(
+                new THREE.QuadraticBezierCurve3(
+                  new THREE.Vector3((eyeX - 0.019) * height, height * 0.878, height * 0.139),
+                  new THREE.Vector3(eyeX * height, height * 0.89, height * 0.151),
+                  new THREE.Vector3((eyeX + 0.019) * height, height * 0.878, height * 0.139)
+                ),
+                8,
+                0.008 * featureScale,
+                5,
+                false
+              ),
+              mats.hair
+            );
+            person.add(brow);
+          }
+          sphere(0.018 * featureScale, mats.blush, -height * 0.08, height * 0.8, height * 0.115, person, [1.35, 0.65, 0.45]);
+          sphere(0.018 * featureScale, mats.blush, height * 0.08, height * 0.8, height * 0.115, person, [1.35, 0.65, 0.45]);
+          const smile = new THREE.Mesh(
+            new THREE.TubeGeometry(
+              new THREE.QuadraticBezierCurve3(
+                new THREE.Vector3(-height * 0.045, height * 0.785, height * 0.127),
+                new THREE.Vector3(0, height * 0.765, height * 0.153),
+                new THREE.Vector3(height * 0.045, height * 0.785, height * 0.127)
+              ),
+              8,
+              0.01 * featureScale,
+              5,
+              false
+            ),
+            mats.smile
+          );
+          person.add(smile);
+
+          if (options.elder) {
+            for (const side of [-1, 1]) {
+              sphere(0.052, mats.silverHair, side * height * 0.11, height * 0.9, 0, person, [0.8, 1, 0.8]);
+            }
+            if (options.beard) {
+              sphere(0.06, mats.silverHair, 0, height * 0.77, height * 0.105, person, [1.25, 0.55, 0.55]);
+            }
+          }
+
+          const scarf = sphere(0.11, mats.gold, 0, height * 0.64, height * 0.18, person, [1.5, 0.15, 0.32]);
+          scarf.castShadow = false;
           for (const side of [-1, 1]) {
             const arm = cylinder(height * 0.055, height * 0.07, height * 0.34, material(clothes), side * height * 0.21, height * 0.51, 0.03, person, 7);
             arm.rotation.z = side * -0.42;
@@ -616,18 +981,23 @@
           for (const side of [-1, 1]) {
             cylinder(height * 0.065, height * 0.075, height * 0.3, mats.door, side * height * 0.1, height * 0.15, 0.02, person, 7);
           }
-          if (holdingSparkler) {
+          if (options.sparkler) {
             const stick = cylinder(0.025, 0.025, 0.7, mats.trim, height * 0.34, height * 0.72, 0.04, person, 6);
             stick.rotation.z = -0.25;
-            sphere(0.12, new THREE.MeshBasicMaterial({ color: "#fff0a0" }), height * 0.4, height * 1.07, 0.05, person);
+            const spark = sphere(0.12, new THREE.MeshBasicMaterial({ color: "#fff0a0" }), height * 0.4, height * 1.07, 0.05, person);
+            const flare = new THREE.PointLight("#ffdc7a", 3, 4);
+            flare.position.copy(spark.position);
+            person.add(flare);
+            sparklerLights.push({ spark, flare, phase: Math.random() * 6 });
           }
           people.push(person);
         }
-        makePerson(-1.75, 0.1, 2.65, "#b5424d");
-        makePerson(-0.2, -0.05, 2.85, "#287c71");
-        makePerson(1.45, 0.1, 2.55, "#a94992");
-        makePerson(-3.25, 0.65, 1.85, "#e29c35", true);
-        makePerson(3.2, 0.7, 1.8, "#4384a0", true);
+        makePerson(-2.75, 0.25, 2.35, "#9d657f", { elder: true });
+        makePerson(2.65, 0.3, 2.45, "#487564", { elder: true, beard: true });
+        makePerson(-1.05, -0.05, 2.72, "#b5424d");
+        makePerson(1.05, -0.02, 2.8, "#287c71");
+        makePerson(-3.65, 0.95, 1.8, "#e29c35", { sparkler: true });
+        makePerson(3.55, 0.95, 1.85, "#4384a0", { sparkler: true });
 
         cylinder(0.47, 0.36, 0.62, mats.gold, 5.1, 0.37, 1.35);
         sphere(0.17, mats.gold, 5.1, 0.78, 1.35, scene, [1.2, 0.65, 1.2]);
@@ -706,7 +1076,7 @@
           const height = canvas.clientHeight;
           if (!width || !height) return;
           camera.aspect = width / height;
-          camera.position.z = Math.max(13, 13 / camera.aspect * 0.72);
+          camera.position.z = Math.max(13, 12.2 / camera.aspect);
           camera.updateProjectionMatrix();
           renderer.setSize(width, height, false);
         }
@@ -731,6 +1101,18 @@
           }
           for (const person of people) {
             person.rotation.y = Math.sin(elapsed * 1.4 + person.position.x) * 0.045;
+          }
+          for (const tree of gardenTrees) {
+            for (const light of tree.userData.lights) {
+              const glow = 0.8 + (Math.sin(elapsed * 2.2 + light.phase) + 1) * 0.75;
+              light.mesh.material.emissiveIntensity = glow;
+              light.mesh.scale.setScalar(0.8 + glow * 0.12);
+            }
+          }
+          for (const sparkler of sparklerLights) {
+            const shimmer = 0.7 + Math.random() * 2.1 + (Math.sin(elapsed * 18 + sparkler.phase) + 1) * 0.35;
+            sparkler.flare.intensity = shimmer;
+            sparkler.spark.scale.setScalar(0.75 + Math.random() * 0.8);
           }
           for (const coin of coins) {
             coin.rotation.y = elapsed * 2 + coin.userData.phase;
