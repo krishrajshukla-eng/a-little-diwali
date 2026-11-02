@@ -27,6 +27,8 @@ The page loads Three.js from jsDelivr, so an internet connection is needed for t
 
 ## Publish and share
 
+**Live site:** [Open A Little Diwali](https://krishrajshukla-eng.github.io/a-little-diwali/).
+
 A link that works for other people needs a public host; a `localhost` link only works on your own computer.
 
 This repository includes a GitHub Pages workflow in `.github/workflows/deploy-pages.yml`. A public site can be hosted from a public repository on GitHub Free; hosting from a private repository depends on your GitHub plan.
