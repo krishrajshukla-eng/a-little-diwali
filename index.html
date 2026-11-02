@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="hi">
-  <head>
+<!DOCTYPE html><html lang="hi"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#100719">
@@ -61,9 +59,176 @@
       .topbar,
       .hero-copy,
       .scene-hint,
-      .wish-card {
+      .wish-card,
+      .scene-controls {
         position: absolute;
         z-index: 1;
+      }
+
+      .welcome-screen {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 50% 50%, rgb(91 37 61 / 45%), transparent 48%),
+          linear-gradient(180deg, #100719, #201026 72%, #351b34);
+        transition: background-color 800ms ease, opacity 650ms ease;
+      }
+
+      .welcome-screen.is-opening {
+        background: transparent;
+        pointer-events: none;
+      }
+
+      .welcome-screen.is-revealed {
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      .welcome-content {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        justify-items: center;
+        width: min(520px, calc(100% - 40px));
+        text-align: center;
+        transition: opacity 450ms ease, transform 650ms ease;
+      }
+
+      .welcome-screen.is-opening .welcome-content {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.98);
+      }
+
+      .welcome-title {
+        margin: 0;
+        color: #fff2ca;
+        font-size: clamp(2.4rem, 8vw, 4.5rem);
+        font-weight: 400;
+        line-height: 1.08;
+      }
+
+      .welcome-title span {
+        display: block;
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .welcome-copy {
+        max-width: 380px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-family: Arial, sans-serif;
+        font-size: 0.96rem;
+        line-height: 1.6;
+      }
+
+      .welcome-hint {
+        margin: 8px 0 0;
+        color: var(--gold);
+        font-family: Arial, sans-serif;
+        font-size: 0.84rem;
+      }
+
+      .welcome-diya {
+        width: min(260px, 62vw);
+        height: auto;
+        margin: 20px 0 8px;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        filter: drop-shadow(0 10px 24px rgb(255 159 56 / 20%));
+        transition: transform 220ms ease, filter 400ms ease;
+      }
+
+      .welcome-diya:hover {
+        transform: translateY(-4px) scale(1.025);
+      }
+
+      .welcome-diya:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 7px;
+      }
+
+      .welcome-diya .welcome-flame,
+      .welcome-diya .welcome-glow {
+        opacity: 0;
+        transition: opacity 350ms ease;
+      }
+
+      .welcome-screen.is-lit .welcome-diya {
+        animation: diya-light 700ms ease-out both;
+        filter: drop-shadow(0 0 28px rgb(255 174 61 / 88%));
+      }
+
+      .welcome-screen.is-lit .welcome-flame,
+      .welcome-screen.is-lit .welcome-glow {
+        opacity: 1;
+      }
+
+      .welcome-screen.is-lit .welcome-flame {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        animation: welcome-flicker 850ms ease-in-out infinite alternate;
+      }
+
+      .welcome-curtain {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        bottom: 0;
+        width: 52%;
+        background:
+          radial-gradient(ellipse at 50% 100%, rgb(238 161 71 / 20%), transparent 55%),
+          repeating-linear-gradient(90deg, transparent 0 34px, rgb(255 218 151 / 7%) 35px 39px),
+          linear-gradient(110deg, #601d36, #91364a 50%, #581a32);
+        box-shadow: inset 0 0 40px rgb(27 8 22 / 42%);
+        transition: transform 1.35s cubic-bezier(0.72, 0, 0.23, 1);
+        pointer-events: none;
+      }
+
+      .welcome-curtain::before {
+        position: absolute;
+        right: 0;
+        left: 0;
+        height: 14px;
+        background: repeating-linear-gradient(90deg, #ffdb8d 0 8px, #b85b4c 8px 16px);
+        content: "";
+      }
+
+      .welcome-curtain::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 25px;
+        background: repeating-linear-gradient(90deg, #e1a34e 0 12px, #7a263e 12px 24px);
+        content: "";
+      }
+
+      .welcome-curtain-left {
+        left: 0;
+        border-right: 2px solid rgb(255 211 126 / 75%);
+        transform-origin: left center;
+      }
+
+      .welcome-curtain-right {
+        right: 0;
+        border-left: 2px solid rgb(255 211 126 / 75%);
+        transform-origin: right center;
+      }
+
+      .welcome-screen.is-opening .welcome-curtain-left {
+        transform: translateX(-102%);
+      }
+
+      .welcome-screen.is-opening .welcome-curtain-right {
+        transform: translateX(102%);
       }
 
       .topbar {
@@ -90,6 +255,48 @@
       .top-actions {
         display: flex;
         gap: 10px;
+      }
+
+      .scene-controls {
+        top: 82px;
+        right: clamp(16px, 5vw, 64px);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px;
+        border: 1px solid rgb(255 210 123 / 35%);
+        border-radius: 999px;
+        background: rgb(16 7 25 / 70%);
+      }
+
+      .scene-controls button {
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        color: #fff3d4;
+        background: rgb(255 255 255 / 8%);
+        font-family: Arial, sans-serif;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .scene-controls button:hover {
+        background: rgb(255 210 123 / 24%);
+      }
+
+      .scene-controls button:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
+
+      .zoom-level {
+        min-width: 42px;
+        color: var(--muted);
+        font-family: Arial, sans-serif;
+        font-size: 0.72rem;
+        text-align: center;
       }
 
       .button {
@@ -214,6 +421,11 @@
           padding: 16px;
         }
 
+        .scene-controls {
+          top: 72px;
+          right: 12px;
+        }
+
         .brand {
           max-width: 125px;
           font-size: 0.68rem;
@@ -256,12 +468,69 @@
           transition-duration: 0.01ms !important;
         }
       }
+
+      @keyframes diya-light {
+        0% { transform: scale(1); }
+        40% { transform: scale(1.13); }
+        100% { transform: scale(1.04); }
+      }
+
+      @keyframes welcome-flicker {
+        from { transform: scale(0.96, 0.94) rotate(-2deg); }
+        to { transform: scale(1.05, 1.04) rotate(2deg); }
+      }
     </style>
   </head>
   <body>
     <main>
       <section class="celebration" aria-labelledby="page-title">
         <canvas id="diwali-scene" aria-hidden="true"></canvas>
+
+        <div class="welcome-screen" id="welcome-screen">
+          <div class="welcome-curtain welcome-curtain-left" aria-hidden="true"></div>
+          <div class="welcome-curtain welcome-curtain-right" aria-hidden="true"></div>
+          <div class="welcome-content">
+            <p class="eyebrow">A little light goes a long way</p>
+            <h2 class="welcome-title">शुभ <span>दीपावली</span></h2>
+            <p class="welcome-copy">A warm Diwali evening, waiting for one little light.</p>
+            <button class="welcome-diya" id="light-diya" type="button" aria-label="Light the diya and open the Diwali celebration" aria-pressed="false">
+              <svg viewBox="0 0 260 190" role="img" aria-labelledby="welcome-diya-title">
+                <title id="welcome-diya-title">Light the diya to begin</title>
+                <defs>
+                  <radialGradient id="welcome-warm-glow">
+                    <stop offset="0%" stop-color="#ffbf52" stop-opacity=".85"></stop>
+                    <stop offset="100%" stop-color="#ff9d35" stop-opacity="0"></stop>
+                  </radialGradient>
+                  <linearGradient id="welcome-bowl" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#ffe8a0"></stop>
+                    <stop offset="45%" stop-color="#e99a37"></stop>
+                    <stop offset="100%" stop-color="#9d3e2d"></stop>
+                  </linearGradient>
+                  <linearGradient id="welcome-flame-fill" x1="0" x2="0" y1="1" y2="0">
+                    <stop offset="0%" stop-color="#ff7a26"></stop>
+                    <stop offset="58%" stop-color="#ffd65d"></stop>
+                    <stop offset="100%" stop-color="#fff5c3"></stop>
+                  </linearGradient>
+                  <filter id="welcome-blur">
+                    <feGaussianBlur stdDeviation="11"></feGaussianBlur>
+                  </filter>
+                </defs>
+                <ellipse class="welcome-glow" cx="130" cy="85" rx="82" ry="78" fill="url(#welcome-warm-glow)" filter="url(#welcome-blur)"></ellipse>
+                <ellipse cx="130" cy="164" rx="88" ry="9" fill="#08040e" opacity=".55"></ellipse>
+                <path d="M47 119 Q130 164 213 119 Q202 169 130 174 Q58 169 47 119Z" fill="url(#welcome-bowl)" stroke="#ffd889" stroke-width="3"></path>
+                <path d="M48 119 Q130 148 212 119" fill="none" stroke="#fff0b5" stroke-width="5"></path>
+                <path d="M117 119 Q130 105 143 119" fill="none" stroke="#fff2cb" stroke-width="4" stroke-linecap="round"></path>
+                <path class="welcome-flame" d="M130 116 C99 91 124 64 132 38 C140 63 169 83 148 109 C143 116 136 119 130 116Z" fill="url(#welcome-flame-fill)" stroke="#ffe9a4" stroke-width="2"></path>
+                <path class="welcome-flame" d="M132 111 C119 96 133 80 136 68 C151 87 150 102 139 112Z" fill="#fff9db"></path>
+                <circle cx="76" cy="122" r="3" fill="#ffd27b"></circle>
+                <circle cx="97" cy="132" r="3" fill="#ffd27b"></circle>
+                <circle cx="163" cy="132" r="3" fill="#ffd27b"></circle>
+                <circle cx="184" cy="122" r="3" fill="#ffd27b"></circle>
+              </svg>
+            </button>
+            <p class="welcome-hint">Tap the diya to light the celebration</p>
+          </div>
+        </div>
 
         <header class="topbar">
           <a class="brand" href="#home">Wishes by Krishraj Shukla</a>
@@ -270,6 +539,12 @@
             <button class="button" id="share-button" type="button">Share</button>
           </div>
         </header>
+
+        <div class="scene-controls" role="group" aria-label="Scene zoom">
+          <button id="zoom-out" type="button" aria-label="Zoom out">−</button>
+          <span class="zoom-level" id="zoom-level" aria-live="polite">100%</span>
+          <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+        </div>
 
         <div class="hero-copy" id="home">
           <p class="eyebrow">The brightest light is being together</p>
@@ -284,7 +559,7 @@
           <p id="wish">इस दिवाली हर अंधेरा छोटा पड़ जाए।</p>
         </div>
         <p class="scene-hint" id="scene-status">
-          Ghar ko ghumane ke liye drag karein · wish aur aasmaan mein roshni ke liye tap karein
+          Drag to look around · scroll or pinch to zoom · tap for a wish
         </p>
       </section>
 
@@ -296,8 +571,12 @@
     <script type="module">
       const wishButton = document.querySelector("#wish-button");
       const shareButton = document.querySelector("#share-button");
+      const welcomeScreen = document.querySelector("#welcome-screen");
+      const lightDiyaButton = document.querySelector("#light-diya");
       const wishBox = document.querySelector("#wish");
       const status = document.querySelector("#scene-status");
+      const zoomLevel = document.querySelector("#zoom-level");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const wishes = [
         "इस दिवाली हर अंधेरा छोटा पड़ जाए।",
         "घर की सबसे प्यारी रोशनी — अपनों के चेहरे।",
@@ -312,6 +591,23 @@
       ];
       let wishIndex = 1;
       let celebrate = () => {};
+
+      lightDiyaButton.addEventListener("click", () => {
+        lightDiyaButton.disabled = true;
+        lightDiyaButton.setAttribute("aria-pressed", "true");
+        welcomeScreen.classList.add("is-lit");
+        status.textContent = "The diya is lit. Opening the celebration...";
+
+        window.setTimeout(() => {
+          welcomeScreen.classList.add("is-opening");
+          status.textContent = "Happy Diwali. Drag to look around, zoom to explore, or tap for a wish.";
+        }, reducedMotion ? 0 : 650);
+
+        window.setTimeout(() => {
+          welcomeScreen.classList.add("is-revealed");
+          welcomeScreen.setAttribute("aria-hidden", "true");
+        }, reducedMotion ? 0 : 2050);
+      });
 
       function showWish() {
         wishBox.textContent = wishes[wishIndex];
@@ -363,7 +659,6 @@
 
       function createScene(THREE) {
         const canvas = document.querySelector("#diwali-scene");
-        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("#101326");
         scene.fog = new THREE.Fog("#242039", 22, 42);
@@ -1046,15 +1341,61 @@
         let targetPitch = 0;
         let dragStart = null;
         let pointerMoved = 0;
+        let pinchStartDistance = null;
+        let startingCameraDistance = 13;
+        let cameraDistance = 13;
+        let hasResized = false;
+        const activePointers = new Map();
         let lastLaunch = 0;
         const clock = new THREE.Clock();
 
+        function setZoom(nextDistance) {
+          cameraDistance = THREE.MathUtils.clamp(
+            nextDistance,
+            startingCameraDistance * 0.6,
+            startingCameraDistance * 1.7
+          );
+          zoomLevel.textContent = `${Math.round((startingCameraDistance / cameraDistance) * 100)}%`;
+        }
+
+        document.querySelector("#zoom-in").addEventListener("click", () => {
+          setZoom(cameraDistance - 1.4);
+        });
+        document.querySelector("#zoom-out").addEventListener("click", () => {
+          setZoom(cameraDistance + 1.4);
+        });
+        canvas.addEventListener("wheel", (event) => {
+          event.preventDefault();
+          setZoom(cameraDistance + Math.sign(event.deltaY) * 0.8);
+        }, { passive: false });
+
         canvas.addEventListener("pointerdown", (event) => {
-          dragStart = { x: event.clientX, y: event.clientY };
+          activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
           pointerMoved = 0;
           canvas.setPointerCapture(event.pointerId);
+          if (activePointers.size === 1) {
+            dragStart = { x: event.clientX, y: event.clientY };
+          } else if (activePointers.size === 2) {
+            const [first, second] = [...activePointers.values()];
+            pinchStartDistance = Math.hypot(first.x - second.x, first.y - second.y);
+            pointerMoved = 8;
+            dragStart = null;
+          }
         });
         canvas.addEventListener("pointermove", (event) => {
+          if (!activePointers.has(event.pointerId)) return;
+          const previousPoint = activePointers.get(event.pointerId);
+          activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+          if (activePointers.size >= 2) {
+            const [first, second] = [...activePointers.values()];
+            const currentDistance = Math.hypot(first.x - second.x, first.y - second.y);
+            if (pinchStartDistance !== null) {
+              setZoom(cameraDistance + (pinchStartDistance - currentDistance) * 0.025);
+            }
+            pinchStartDistance = currentDistance;
+            pointerMoved += Math.abs(event.clientX - previousPoint.x) + Math.abs(event.clientY - previousPoint.y);
+            return;
+          }
           if (!dragStart) return;
           const dx = event.clientX - dragStart.x;
           const dy = event.clientY - dragStart.y;
@@ -1063,12 +1404,18 @@
           targetPitch = THREE.MathUtils.clamp(targetPitch + dy * 0.003, -0.3, 0.5);
           dragStart = { x: event.clientX, y: event.clientY };
         });
-        canvas.addEventListener("pointerup", () => {
-          if (dragStart && pointerMoved < 8) showWish();
-          dragStart = null;
-        });
-        canvas.addEventListener("pointercancel", () => {
-          dragStart = null;
+        function endPointer(event) {
+          const wasTap = activePointers.size === 1 && dragStart && pointerMoved < 8;
+          activePointers.delete(event.pointerId);
+          if (wasTap) showWish();
+          dragStart = activePointers.size === 1 ? [...activePointers.values()][0] : null;
+          pinchStartDistance = null;
+        }
+        canvas.addEventListener("pointerup", endPointer);
+        canvas.addEventListener("pointercancel", (event) => {
+          activePointers.delete(event.pointerId);
+          dragStart = activePointers.size === 1 ? [...activePointers.values()][0] : null;
+          pinchStartDistance = null;
         });
 
         function resize() {
@@ -1076,7 +1423,22 @@
           const height = canvas.clientHeight;
           if (!width || !height) return;
           camera.aspect = width / height;
-          camera.position.z = Math.max(13, 12.2 / camera.aspect);
+          const nextStartingDistance = Math.max(13, 12.2 / camera.aspect);
+          if (hasResized) {
+            const zoomRatio = cameraDistance / startingCameraDistance;
+            startingCameraDistance = nextStartingDistance;
+            cameraDistance = THREE.MathUtils.clamp(
+              startingCameraDistance * zoomRatio,
+              startingCameraDistance * 0.6,
+              startingCameraDistance * 1.7
+            );
+          } else {
+            startingCameraDistance = nextStartingDistance;
+            cameraDistance = startingCameraDistance;
+            hasResized = true;
+          }
+          camera.position.z = cameraDistance;
+          setZoom(cameraDistance);
           camera.updateProjectionMatrix();
           renderer.setSize(width, height, false);
         }
@@ -1089,6 +1451,7 @@
           const elapsed = clock.elapsedTime;
           yaw += (targetYaw - yaw) * 0.06;
           pitch += (targetPitch - pitch) * 0.06;
+          camera.position.z = cameraDistance;
           camera.position.x = Math.sin(yaw) * camera.position.z;
           camera.position.y = 6.4 + pitch * 4;
           camera.lookAt(0, 4.1, -1.2);
@@ -1150,5 +1513,6 @@
         animate();
       }
     </script>
-  </body>
-</html>
+  
+
+</body></html>
