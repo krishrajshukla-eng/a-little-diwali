@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="hi"><head>
+<!doctype html>
+<html lang="hi">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#100719">
@@ -484,7 +486,7 @@
   <body>
     <main>
       <section class="celebration" aria-labelledby="page-title">
-        <canvas id="diwali-scene" aria-hidden="true" data-engine="three.js r169" width="1343" height="628"></canvas>
+        <canvas id="diwali-scene" aria-hidden="true"></canvas>
 
         <div class="welcome-screen" id="welcome-screen">
           <div class="welcome-curtain welcome-curtain-left" aria-hidden="true"></div>
@@ -493,39 +495,45 @@
             <p class="eyebrow">A little light goes a long way</p>
             <h2 class="welcome-title">शुभ <span>दीपावली</span></h2>
             <p class="welcome-copy">A warm Diwali evening, waiting for one little light.</p>
-            <button class="welcome-diya" id="light-diya" type="button" aria-label="Light the diya and open the Diwali celebration" aria-pressed="false">
+            <button
+              class="welcome-diya"
+              id="light-diya"
+              type="button"
+              aria-label="Light the diya and open the Diwali celebration"
+              aria-pressed="false"
+            >
               <svg viewBox="0 0 260 190" role="img" aria-labelledby="welcome-diya-title">
                 <title id="welcome-diya-title">Light the diya to begin</title>
                 <defs>
                   <radialGradient id="welcome-warm-glow">
-                    <stop offset="0%" stop-color="#ffbf52" stop-opacity=".85"></stop>
-                    <stop offset="100%" stop-color="#ff9d35" stop-opacity="0"></stop>
+                    <stop offset="0%" stop-color="#ffbf52" stop-opacity=".85"/>
+                    <stop offset="100%" stop-color="#ff9d35" stop-opacity="0"/>
                   </radialGradient>
                   <linearGradient id="welcome-bowl" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#ffe8a0"></stop>
-                    <stop offset="45%" stop-color="#e99a37"></stop>
-                    <stop offset="100%" stop-color="#9d3e2d"></stop>
+                    <stop offset="0%" stop-color="#ffe8a0"/>
+                    <stop offset="45%" stop-color="#e99a37"/>
+                    <stop offset="100%" stop-color="#9d3e2d"/>
                   </linearGradient>
                   <linearGradient id="welcome-flame-fill" x1="0" x2="0" y1="1" y2="0">
-                    <stop offset="0%" stop-color="#ff7a26"></stop>
-                    <stop offset="58%" stop-color="#ffd65d"></stop>
-                    <stop offset="100%" stop-color="#fff5c3"></stop>
+                    <stop offset="0%" stop-color="#ff7a26"/>
+                    <stop offset="58%" stop-color="#ffd65d"/>
+                    <stop offset="100%" stop-color="#fff5c3"/>
                   </linearGradient>
                   <filter id="welcome-blur">
-                    <feGaussianBlur stdDeviation="11"></feGaussianBlur>
+                    <feGaussianBlur stdDeviation="11"/>
                   </filter>
                 </defs>
-                <ellipse class="welcome-glow" cx="130" cy="85" rx="82" ry="78" fill="url(#welcome-warm-glow)" filter="url(#welcome-blur)"></ellipse>
-                <ellipse cx="130" cy="164" rx="88" ry="9" fill="#08040e" opacity=".55"></ellipse>
-                <path d="M47 119 Q130 164 213 119 Q202 169 130 174 Q58 169 47 119Z" fill="url(#welcome-bowl)" stroke="#ffd889" stroke-width="3"></path>
-                <path d="M48 119 Q130 148 212 119" fill="none" stroke="#fff0b5" stroke-width="5"></path>
-                <path d="M117 119 Q130 105 143 119" fill="none" stroke="#fff2cb" stroke-width="4" stroke-linecap="round"></path>
-                <path class="welcome-flame" d="M130 116 C99 91 124 64 132 38 C140 63 169 83 148 109 C143 116 136 119 130 116Z" fill="url(#welcome-flame-fill)" stroke="#ffe9a4" stroke-width="2"></path>
-                <path class="welcome-flame" d="M132 111 C119 96 133 80 136 68 C151 87 150 102 139 112Z" fill="#fff9db"></path>
-                <circle cx="76" cy="122" r="3" fill="#ffd27b"></circle>
-                <circle cx="97" cy="132" r="3" fill="#ffd27b"></circle>
-                <circle cx="163" cy="132" r="3" fill="#ffd27b"></circle>
-                <circle cx="184" cy="122" r="3" fill="#ffd27b"></circle>
+                <ellipse class="welcome-glow" cx="130" cy="85" rx="82" ry="78" fill="url(#welcome-warm-glow)" filter="url(#welcome-blur)"/>
+                <ellipse cx="130" cy="164" rx="88" ry="9" fill="#08040e" opacity=".55"/>
+                <path d="M47 119 Q130 164 213 119 Q202 169 130 174 Q58 169 47 119Z" fill="url(#welcome-bowl)" stroke="#ffd889" stroke-width="3"/>
+                <path d="M48 119 Q130 148 212 119" fill="none" stroke="#fff0b5" stroke-width="5"/>
+                <path d="M117 119 Q130 105 143 119" fill="none" stroke="#fff2cb" stroke-width="4" stroke-linecap="round"/>
+                <path class="welcome-flame" d="M130 116 C99 91 124 64 132 38 C140 63 169 83 148 109 C143 116 136 119 130 116Z" fill="url(#welcome-flame-fill)" stroke="#ffe9a4" stroke-width="2"/>
+                <path class="welcome-flame" d="M132 111 C119 96 133 80 136 68 C151 87 150 102 139 112Z" fill="#fff9db"/>
+                <circle cx="76" cy="122" r="3" fill="#ffd27b"/>
+                <circle cx="97" cy="132" r="3" fill="#ffd27b"/>
+                <circle cx="163" cy="132" r="3" fill="#ffd27b"/>
+                <circle cx="184" cy="122" r="3" fill="#ffd27b"/>
               </svg>
             </button>
             <p class="welcome-hint">Tap the diya to light the celebration</p>
@@ -703,6 +711,9 @@
           basket: material("#985333", 0.74),
           bowl: material("#bd642e", 0.42, { metalness: 0.2 }),
           gold: material("#ffce59", 0.32, { metalness: 0.7 }),
+          flowerPink: material("#f08bb4", 0.48),
+          flowerCoral: material("#ef765e", 0.48),
+          flowerWhite: material("#fff0cf", 0.48),
           fruitOrange: material("#ed7437", 0.42),
           fruitMango: material("#f4bd45", 0.45),
           fruitRed: material("#bf3d45", 0.4),
@@ -816,16 +827,58 @@
         roof.castShadow = true;
         roof.receiveShadow = true;
         house.add(roof);
+        box(6.8, 2.1, 0.55, material("#a75943"), 0, 5.25, 0.42, house);
+        box(7.05, 0.14, 0.76, mats.trim, 0, 6.3, 0.4, house);
+        for (const x of [-2.05, 2.05]) {
+          box(1.25, 1.22, 0.16, mats.trim, x, 5.25, 0.73, house);
+          box(0.98, 0.95, 0.1, mats.window, x, 5.25, 0.84, house);
+          box(0.08, 0.95, 0.12, mats.trim, x, 5.25, 0.9, house);
+          box(0.98, 0.08, 0.12, mats.trim, x, 5.25, 0.9, house);
+          box(1.38, 0.08, 0.55, mats.trim, x, 4.58, 0.79, house);
+          box(0.08, 0.42, 0.08, mats.gold, x - 0.56, 4.78, 1.04, house);
+          box(0.08, 0.42, 0.08, mats.gold, x + 0.56, 4.78, 1.04, house);
+        }
+        const upperRoofShape = new THREE.Shape();
+        upperRoofShape.moveTo(-3.8, 0);
+        upperRoofShape.lineTo(0, 1.85);
+        upperRoofShape.lineTo(3.8, 0);
+        upperRoofShape.closePath();
+        const upperRoof = new THREE.Mesh(
+          new THREE.ExtrudeGeometry(upperRoofShape, { depth: 0.72, bevelEnabled: false }),
+          mats.roof
+        );
+        upperRoof.position.set(0, 6.3, 0.03);
+        upperRoof.castShadow = true;
+        upperRoof.receiveShadow = true;
+        house.add(upperRoof);
+        box(7.85, 0.15, 0.84, mats.trim, 0, 6.32, 0.18, house);
         const chimneyX = 3.25;
-        box(0.66, 1.78, 0.76, material("#8d443a"), chimneyX, 5.72, 0.1, house);
-        box(0.88, 0.17, 0.94, mats.trim, chimneyX, 6.66, 0.1, house);
-        box(0.4, 0.07, 0.57, mats.door, chimneyX, 6.77, 0.17, house);
+        box(0.66, 2.3, 0.76, material("#8d443a"), chimneyX, 7.55, 0.1, house);
+        box(0.88, 0.17, 0.94, mats.trim, chimneyX, 8.78, 0.1, house);
+        box(0.4, 0.07, 0.57, mats.door, chimneyX, 8.89, 0.17, house);
         const chimneySmoke = [];
         for (let i = 0; i < 5; i++) {
-          const puff = sphere(0.17, mats.smoke.clone(), chimneyX, 6.95 + i * 0.3, 0.2, house, [1.2, 0.85, 1]);
+          const puff = sphere(0.17, mats.smoke.clone(), chimneyX, 9.07 + i * 0.3, 0.2, house, [1.2, 0.85, 1]);
           puff.userData.phase = i * 1.15;
           puff.userData.startY = puff.position.y;
           chimneySmoke.push(puff);
+        }
+        const upperGarlandCurve = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(-3.1, 6.18, 0.75),
+          new THREE.Vector3(-2, 5.98, 0.78),
+          new THREE.Vector3(-1, 5.9, 0.8),
+          new THREE.Vector3(0, 5.87, 0.8),
+          new THREE.Vector3(1, 5.9, 0.8),
+          new THREE.Vector3(2, 5.98, 0.78),
+          new THREE.Vector3(3.1, 6.18, 0.75)
+        ]);
+        house.add(new THREE.Mesh(
+          new THREE.TubeGeometry(upperGarlandCurve, 28, 0.04, 6, false),
+          material("#dc813d")
+        ));
+        for (let i = 0; i <= 12; i++) {
+          const x = -3 + i * 0.5;
+          sphere(0.08, i % 2 ? mats.gold : mats.fruitOrange, x, 5.88 + Math.abs(x) * 0.09, 0.84, house);
         }
         box(8.7, 0.16, 0.9, mats.trim, 0, 4.2, 0.04, house);
         box(1.65, 2.75, 0.2, mats.door, 0, 1.38, 0.42, house);
@@ -841,6 +894,11 @@
 
         const frameColors = ["#d6634c", "#e7a43a", "#8d5bb5"];
         const frameTitles = ["शुभ लाभ", "राम दरबार", "श्री लक्ष्मी"];
+        const frameLayouts = [
+          { x: -2.55, y: 3.48, width: 2.12, height: 1.38 },
+          { x: 2.3, y: 3.48, width: 1.78, height: 1.34 },
+          { x: -0.1, y: 3.48, width: 1.45, height: 1.03 }
+        ];
         const photoTexture = new THREE.TextureLoader().load(
           "./assets/laxmi-ganesh.webp",
           (texture) => {
@@ -874,10 +932,7 @@
           }
           const texture = new THREE.CanvasTexture(art);
           texture.colorSpace = THREE.SRGBColorSpace;
-          const x = (i - 1) * 2.55;
-          const width = i === 1 ? 1.95 : (i === 0 ? 1.62 : 1.48);
-          const height = i === 1 ? 1.48 : (i === 0 ? 1.08 : 1.13);
-          const y = i === 1 ? 3.38 : 3.55;
+          const { x, y, width, height } = frameLayouts[i];
           box(width + 0.2, height + 0.2, 0.12, mats.gold, x, y, 0.47, house);
           const image = new THREE.Mesh(
             new THREE.PlaneGeometry(width, height),
@@ -1258,6 +1313,26 @@
         );
         shubhLabhSign.position.set(0, 2.15, 0.57);
         house.add(shubhLabhSign);
+        const gateCanvas = document.createElement("canvas");
+        gateCanvas.width = 256;
+        gateCanvas.height = 256;
+        const gateContext = gateCanvas.getContext("2d");
+        gateContext.fillStyle = "#f6d78e";
+        gateContext.beginPath();
+        gateContext.arc(128, 128, 119, 0, Math.PI * 2);
+        gateContext.fill();
+        gateContext.strokeStyle = "#a33d36";
+        gateContext.lineWidth = 9;
+        gateContext.stroke();
+        drawSwastika(gateContext, 128, 128, 68);
+        const gateTexture = new THREE.CanvasTexture(gateCanvas);
+        gateTexture.colorSpace = THREE.SRGBColorSpace;
+        const gateSymbol = new THREE.Mesh(
+          new THREE.PlaneGeometry(0.48, 0.48),
+          new THREE.MeshBasicMaterial({ map: gateTexture })
+        );
+        gateSymbol.position.set(0, 1.57, 0.57);
+        house.add(gateSymbol);
 
         const garlandCurve = new THREE.QuadraticBezierCurve3(
           new THREE.Vector3(-3.85, 4.05, 0.54),
@@ -1352,7 +1427,7 @@
         makePlant(-5.9, 2.4);
         makePlant(5.9, 2.4);
 
-        function makeGardenTree(x, z, scale = 1) {
+        function makeGardenTree(x, z, scale = 1, blossoms = false) {
           const tree = new THREE.Group();
           tree.position.set(x, 0, z);
           tree.scale.setScalar(scale);
@@ -1369,7 +1444,9 @@
             const [leafX, leafY, leafZ, radius] = canopyPoints[i];
             sphere(radius, i % 2 ? mats.grassLight : mats.leaf, leafX, leafY, leafZ, tree);
           }
-          const marigold = [material("#f5a63b", 0.6), material("#e66b44", 0.58), mats.gold];
+          const marigold = blossoms
+            ? [mats.flowerPink, mats.flowerCoral, mats.flowerWhite]
+            : [material("#f5a63b", 0.6), material("#e66b44", 0.58), mats.gold];
           for (let i = 0; i < 13; i++) {
             const angle = (i / 13) * Math.PI * 2;
             const flower = sphere(
@@ -1381,6 +1458,31 @@
               tree
             );
             flower.scale.set(1, 0.75, 1);
+          }
+          if (blossoms) {
+            for (let i = 0; i < 22; i++) {
+              const angle = i * 2.399;
+              const cluster = new THREE.Group();
+              cluster.position.set(
+                Math.cos(angle) * (0.55 + (i % 3) * 0.13),
+                2.5 + (i % 5) * 0.24,
+                Math.sin(angle) * (0.48 + (i % 2) * 0.2)
+              );
+              for (let petal = 0; petal < 5; petal++) {
+                const petalAngle = (petal / 5) * Math.PI * 2;
+                sphere(
+                  0.095,
+                  marigold[(i + petal) % marigold.length],
+                  Math.cos(petalAngle) * 0.1,
+                  Math.sin(petalAngle) * 0.1,
+                  0,
+                  cluster,
+                  [1, 0.72, 0.7]
+                );
+              }
+              sphere(0.045, mats.gold, 0, 0, 0.06, cluster);
+              tree.add(cluster);
+            }
           }
           const lights = [];
           for (let i = 0; i < 9; i++) {
@@ -1405,7 +1507,11 @@
           makeGardenTree(-5.2, -2.5, 0.92),
           makeGardenTree(5.2, -2.5, 0.92),
           makeGardenTree(-5.7, 1.7, 0.58),
-          makeGardenTree(5.7, 1.7, 0.58)
+          makeGardenTree(5.7, 1.7, 0.58),
+          makeGardenTree(-7.3, -4.3, 0.86, true),
+          makeGardenTree(7.3, -4.3, 0.86, true),
+          makeGardenTree(-7.5, 2.8, 0.76, true),
+          makeGardenTree(7.5, 2.8, 0.76, true)
         ];
 
         const people = [];
@@ -1492,13 +1598,40 @@
         makePerson(1.05, -0.02, 2.8, "#287c71");
         makePerson(-3.65, 0.95, 1.8, "#e29c35", { sparkler: true });
         makePerson(3.55, 0.95, 1.85, "#4384a0", { sparkler: true });
+        makePerson(-5.65, 2.15, 1.82, "#7b589d", { sparkler: true });
+        makePerson(5.65, 2.15, 1.88, "#e07152", { sparkler: true });
+        makePerson(4.65, 3.8, 1.78, "#498d75");
+
+        const rocketX = -5.3;
+        const rocketZ = 3.6;
+        cylinder(0.06, 0.1, 0.52, mats.bark, rocketX, 0.26, rocketZ, scene, 8);
+        cylinder(0.035, 0.035, 1.55, mats.trim, rocketX, 1.1, rocketZ, scene, 8);
+        const rocket = new THREE.Group();
+        rocket.position.set(rocketX, 0.5, rocketZ);
+        rocket.visible = false;
+        scene.add(rocket);
+        cylinder(0.07, 0.07, 0.5, mats.fruitRed, 0, 0.29, 0, rocket, 8);
+        const rocketNose = new THREE.Mesh(
+          new THREE.ConeGeometry(0.075, 0.2, 8),
+          mats.gold
+        );
+        rocketNose.position.y = 0.64;
+        rocket.add(rocketNose);
+        for (const side of [-1, 1]) {
+          const fin = box(0.15, 0.2, 0.06, mats.trim, side * 0.08, 0.12, 0, rocket);
+          fin.rotation.z = side * -0.35;
+        }
+        const rocketFlame = sphere(0.085, new THREE.MeshBasicMaterial({ color: "#ff963d" }), 0, -0.08, 0, rocket, [0.72, 1.6, 0.72]);
+        const rocketGlow = new THREE.PointLight("#ffb553", 2.5, 3);
+        rocketGlow.position.set(0, -0.18, 0);
+        rocket.add(rocketGlow);
 
         const fireworks = [];
-        function launchFirework() {
+        function launchFirework(originPosition) {
           const count = 38;
           const positions = new Float32Array(count * 3);
           const velocities = new Float32Array(count * 3);
-          const origin = new THREE.Vector3((Math.random() - 0.5) * 12, 5 + Math.random() * 5, -7);
+          const origin = originPosition || new THREE.Vector3((Math.random() - 0.5) * 12, 5 + Math.random() * 5, -7);
           for (let i = 0; i < count; i++) {
             const angle = Math.random() * Math.PI * 2;
             const elevation = Math.random() * Math.PI;
@@ -1532,6 +1665,8 @@
         let hasResized = false;
         const activePointers = new Map();
         let lastLaunch = 0;
+        let lastRocketLaunch = -6;
+        let rocketLaunchStarted = 0;
         const clock = new THREE.Clock();
 
         function setZoom(nextDistance) {
@@ -1642,6 +1777,24 @@
           camera.lookAt(0, 4.1, -1.2);
           stars.rotation.y = elapsed * 0.006;
 
+          if (!reducedMotion && !rocket.visible && elapsed - lastRocketLaunch > 8.5) {
+            rocket.visible = true;
+            rocket.position.y = 0.5;
+            rocketLaunchStarted = elapsed;
+            lastRocketLaunch = elapsed;
+          }
+          if (rocket.visible) {
+            const flightTime = elapsed - rocketLaunchStarted;
+            rocket.position.y = 0.5 + flightTime * 4.2;
+            rocketFlame.scale.y = 1.2 + Math.sin(elapsed * 24) * 0.25;
+            rocketGlow.intensity = 2 + Math.sin(elapsed * 18) * 0.5;
+            if (flightTime >= 1.55) {
+              const burstPosition = new THREE.Vector3(rocketX, rocket.position.y + 0.75, rocketZ);
+              rocket.visible = false;
+              launchFirework(burstPosition);
+            }
+          }
+
           for (const flame of flames) {
             const flicker = 1 + Math.sin(elapsed * 9 + flame.phase) * 0.12;
             flame.flame.scale.y = 1.6 * flicker;
@@ -1712,6 +1865,5 @@
         animate();
       }
     </script>
-  
-
-</body></html>
+  </body>
+</html>
