@@ -4,6 +4,9 @@
 
 This is a personal, beginner-friendly web project by **Krishraj Shukla**. It turns a few lines of festive wishes into a little interactive night scene: a home, diyas, a family, and fireworks.
 
+**Website:** [a-little-diwali](https://krishrajshukla-eng.github.io/a-little-diwali/) ·
+**Source:** [GitHub repository](https://github.com/krishrajshukla-eng/a-little-diwali)
+
 It is a simple creative project, not a realistic Diwali simulation. The scene uses stylised 3D shapes; the focus is on a warm greeting, not photorealism.
 
 ## What you can do
@@ -25,16 +28,7 @@ The page loads Three.js from jsDelivr, so an internet connection is needed for t
 
 ## Publish and share
 
-A link that works for other people needs a public host; a `localhost` link only works on your own computer.
-
-This repository includes a GitHub Pages workflow in `.github/workflows/deploy-pages.yml`. A public site can be hosted from a public repository on GitHub Free; hosting from a private repository depends on your GitHub plan.
-
-1. In GitHub, open the repository's **Settings → Pages** and enable Pages. The workflow cannot enable Pages automatically for this repository.
-2. Set the build and deployment source to **GitHub Actions**.
-3. Push `index.html` and the workflow to the repository's `main` branch.
-4. After the **Deploy Diwali site** workflow succeeds, share the Pages URL GitHub shows.
-
-Be aware: making an existing private repository public also makes its files and commit history public. Use a separate public repository if you do not want to expose unrelated work. Until Pages is enabled and deployment succeeds, there is no live public link to share.
+The site is deployed from this dedicated public repository with GitHub Pages. Updates to `index.html` or the deployment workflow on `main` publish automatically. This repo contains only the website and its documentation; the original tutorial repository stays private.
 
 ## A note on the Share button
 
